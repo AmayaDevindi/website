@@ -1,280 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Amaya Devindi</title>
-  <link rel="icon" type="image/svg+xml" href="images/main/icon.svg">
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amaya Devindi</title>
+    <!-- Placeholder for favicon: using a generic image URL for compliance -->
+    <link rel="icon" type="image/png" href="https://placehold.co/16x16/000/fff?text=A">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'primary-blue': '#4c7cff',
-            'accent-red': '#ff6f61',
-            'accent-green': '#55b76b',
-            'accent-yellow': '#fbd462',
-            'accent-purple': '#a06fff',
-            'accent-teal': '#4cd8c2',
-          },
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
-        },
-      },
-    };
-  </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#4c7cff',
+                        'accent-red': '#ff6f61',
+                        'accent-green': '#55b76b',
+                        'accent-yellow': '#fbd462',
+                        'accent-purple': '#a06fff',
+                        'accent-teal': '#4cd8c2',
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                },
+            },
+        };
+    </script>
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #000;
-      color: #f0f4f8;
-      overflow: hidden;
-    }
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #f0f4f8;
+            /* FIX: Allow vertical scrolling and prevent horizontal scroll */
+            overflow-y: auto;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
 
-    @keyframes float-gentle {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
+        /* Keyframes for gentle floating animation */
+        @keyframes float-gentle {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
 
-    @keyframes float-gentle-centered {
-      0% { transform: translateX(-50%) translateY(0px); }
-      50% { transform: translateX(-50%) translateY(-10px); }
-      100% { transform: translateX(-50%) translateY(0px); }
-    }
+        @keyframes float-gentle-centered {
+            0% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+            100% { transform: translateX(-50%) translateY(0px); }
+        }
 
-    #main-container {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      transition: opacity 0.3s ease-in;
-    }
+        #main-container {
+            /* Changed height to min-height for scrollability */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.3s ease-in;
+        }
 
-    #radial-container {
-      height: 100vh;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
+        #radial-container {
+            /* Now only contains the radial floating elements and profile */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Set a defined height to contain radial layout */
+            min-height: 100vh; /* Increased height to accommodate 6th element */
+            /* FIX: Allow content to overflow vertically */
+            overflow: visible;
+        }
 
-    /* Profile Center */
-    #profile-center {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: #1f2130;
-      box-shadow: 0 0 0 6px rgba(71, 85, 105, 0.5),
-                  0 10px 40px rgba(0, 0, 0, 0.8);
-      border: 4px solid #5a6b82;
-      z-index: 100;
-      position: relative;
-      transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-      margin-top: -50px;
-    }
+        /* Profile Center */
+        #profile-center {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: #1f2130;
+            box-shadow: 0 0 0 6px rgba(71, 85, 105, 0.5),
+                        0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 4px solid #5a6b82;
+            z-index: 100;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            margin-top: -50px; /* Desktop position adjustment */
+        }
 
-    #profile-center:hover {
-      box-shadow: 0 0 0 8px #4c7cff, 0 0 50px rgba(76, 124, 255, 0.9);
-      transform: scale(1.05) rotate(-2deg);
-    }
+        #profile-center:hover {
+            box-shadow: 0 0 0 8px #4c7cff, 0 0 50px rgba(76, 124, 255, 0.9);
+            transform: scale(1.05) rotate(-2deg);
+        }
 
-    #profile-center img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.8;
-      transition: opacity 0.3s;
-    }
+        #profile-center img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
 
-    /* Floating Categories */
-    .platform {
-      position: absolute;
-      padding: 1.25rem 2.5rem;
-      border-radius: 9999px;
-      cursor: pointer;
-      color: white;
-      font-weight: 600;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
-      transition: all 0.4s ease-in-out;
-      z-index: 50;
-      text-align: center;
-      min-width: 140px;
-      animation: float-gentle 5s ease-in-out infinite;
-    }
+        /* Floating Categories */
+        .platform {
+            position: absolute;
+            padding: 1.25rem 2.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+            transition: all 0.4s ease-in-out;
+            z-index: 50;
+            text-align: center;
+            min-width: 140px;
+            animation: float-gentle 5s ease-in-out infinite;
+            text-decoration: none;
+        }
 
-    /* Hover Glow */
-    .platform:hover {
-      transform: scale(1.1) translateY(-10px);
-      box-shadow: 0 0 25px var(--hover-color),
-                  0 0 60px var(--hover-color),
-                  0 10px 40px rgba(0, 0, 0, 0.8);
-      filter: brightness(1.2);
-    }
+        /* Hover Glow */
+        .platform:hover {
+            transform: scale(1.1) translateY(-10px);
+            box-shadow: 0 0 25px var(--hover-color),
+                        0 0 60px var(--hover-color),
+                        0 10px 40px rgba(0, 0, 0, 0.8);
+            filter: brightness(1.2);
+        }
 
-    /* Connecting SVG Lines */
-    #connection-lines line {
-      filter: drop-shadow(0 0 6px currentColor);
-      transition: stroke 0.3s, opacity 0.3s;
-      opacity: 0.6;
-    }
+        /* Connecting SVG Lines */
+        #connection-lines line {
+            filter: drop-shadow(0 0 6px currentColor);
+            transition: stroke 0.3s, opacity 0.3s;
+            opacity: 0.6;
+        }
 
-    /* Default desktop positions */
-    #p-projects {
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: float-gentle-centered 5s ease-in-out infinite;
-    }
+        /* ---------------------------------------------------- */
+        /* DESKTOP (RADIAL) POSITIONING (6 ELEMENTS) */
+        /* ---------------------------------------------------- */
+        
+        /* 1. Projects (Top Center) */
+        #p-projects {
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float-gentle-centered 5s ease-in-out infinite;
+        }
 
-    #p-academic {
-      top: 15%;
-      left: 20%;
-      animation-delay: 0.5s;
-    }
+        /* 2. Academic (Top-Left Diagonal) */
+        #p-academic {
+            top: 15%;
+            left: 20%;
+            right: auto;
+            animation-delay: 0.5s;
+        }
 
-    #p-selflearning {
-      top: 15%;
-      right: 20%;
-      animation-delay: 1s;
-    }
+        /* 3. Self Learning (Top-Right Diagonal) */
+        #p-selflearning {
+            top: 15%;
+            right: 20%;
+            left: auto;
+            animation-delay: 1s;
+        }
 
-    #p-hobbies-main {
-      top: 40%;
-      left: 5%;
-      animation-delay: 1.5s;
-    }
+        /* 4. Hobbies (Mid-Left Horizontal) */
+        #p-hobbies-main {
+            top: 35%;
+            left: 5%;
+            right: auto;
+            animation-delay: 1.5s;
+        }
 
-    #p-aesthetic-main {
-      top: 40%;
-      right: 5%;
-      animation-delay: 2s;
-    }
+        /* 5. Aesthetic (Mid-Right Horizontal) */
+        #p-aesthetic-main {
+            top: 35%;
+            right: 5%;
+            left: auto;
+            animation-delay: 2s;
+        }
+        
+        /* 6. Community Resources (Lower-Right Diagonal, "under aesthetic") */
+        #p-community-resources {
+            top: 55%;
+            right: 15%;
+            left: auto;
+            animation-delay: 2.5s;
+        }
 
-    /* About Me */
-    #about-me-inline {
-      position: absolute;
-      top: calc(50% + 70px);
-      width: 100%;
-      padding-top: 2rem;
-      text-align: center;
-    }
+        /* About Me Positioning (Pushed down further) */
+        #about-me-inline {
+            position: absolute;
+            top: calc(50% + 140px); /* Adjusted slightly lower to clear profile and new links */
+            width: 100%;
+            padding-top: 2rem;
+            text-align: center;
+        }
 
-    /* ===== RESPONSIVE FIXES ===== */
+        /* ===== RESPONSIVE FIXES ===== */
 
-    /* Medium screens (tablets) */
-    @media (max-width: 1024px) {
-      #p-projects { top: 8%; left: 50%; transform: translateX(-50%); }
-      #p-academic { top: 20%; left: 10%; }
-      #p-selflearning { top: 20%; right: 10%; }
-      #p-hobbies-main { top: 45%; left: 10%; }
-      #p-aesthetic-main { top: 45%; right: 10%; }
-      #profile-center { width: 160px; height: 160px; }
-    }
+        /* Medium screens (tablets) */
+        @media (max-width: 1024px) {
+            #radial-container { min-height: 80vh; } 
+            
+            #p-projects { top: 8%; left: 50%; transform: translateX(-50%); }
+            #p-academic { top: 20%; left: 10%; }
+            #p-selflearning { top: 20%; right: 10%; }
+            #p-hobbies-main { top: 40%; left: 10%; }
+            #p-aesthetic-main { top: 40%; right: 10%; }
+            #p-community-resources { top: 60%; right: 10%; } /* Adjusted position */
 
-    /* Small screens (mobiles) */
-    @media (max-width: 768px) {
-      #p-projects { top: 5%; left: 50%; transform: translateX(-50%); }
-      #p-academic { top: 25%; left: 50%; transform: translateX(-50%); }
-      #p-selflearning { top: 40%; left: 50%; transform: translateX(-50%); }
-      #p-hobbies-main { top: 55%; left: 50%; transform: translateX(-50%); }
-      #p-aesthetic-main { top: 70%; left: 50%; transform: translateX(-50%); }
-      .platform { animation: none; }
-      #profile-center { width: 140px; height: 140px; margin-top: 0; }
-      #about-me-inline { top: 85%; padding: 0 1rem; }
-    }
-  </style>
+
+            #profile-center { width: 160px; height: 160px; margin-top: -40px; }
+            #about-me-inline { top: calc(50% + 100px); } 
+        }
+
+        /* Small screens (mobiles) - Stacking Layout */
+        @media (max-width: 768px) {
+            #radial-container {
+                align-items: center;
+                min-height: auto;
+                padding: 40px 1rem;
+                /* Force column direction to stack elements */
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+            
+            /* Profile Picture flows naturally */
+            #profile-center {
+                position: relative;
+                margin: 0 auto 1rem auto;
+                width: 140px;
+                height: 140px;
+                margin-top: 0;
+            }
+
+            /* About Me flows naturally */
+            #about-me-inline {
+                position: relative;
+                top: auto;
+                padding: 1rem 0 2rem 0;
+                width: 100%;
+            }
+
+            /* Platforms stack vertically and are centered */
+            .platform {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                transform: none !important; /* Remove float animation translation/centering */
+                animation: none !important;
+                margin: 0.75rem auto;
+                width: 90%;
+                max-width: 350px;
+                padding: 1rem 1.5rem;
+                box-sizing: border-box;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <div id="main-container">
-    <div id="radial-container">
-      <!-- SVG Lines -->
-      <svg id="connection-lines" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="main-container">
+        <div id="radial-container">
+            <!-- SVG Lines -->
+            <svg id="connection-lines" class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg"></svg>
 
-      <!-- Center Profile -->
-      <div id="profile-center">
-        <img src="images/main/image.png" alt="Profile Picture">
-      </div>
+            <!-- Center Profile -->
+            <div id="profile-center">
+                <!-- Using a placeholder image with fallback text -->
+                <img src="https://placehold.co/200x200/1f2130/ffffff?text=AD" alt="Profile Picture" onerror="this.onerror=null; this.src='https://placehold.co/200x200/1f2130/ffffff?text=AD';">
+            </div>
 
-      <!-- Floating Platforms -->
-      <a href="projects.html" id="p-projects" class="platform bg-primary-blue">Projects</a>
-      <a href="academic_and_extracurricular.html" id="p-academic" class="platform bg-accent-yellow text-gray-900">Academic & Extracurricular</a>
-      <a href="self_learning.html" id="p-selflearning" class="platform bg-accent-teal">Self Learning</a>
-      <a href="hobbies.html" id="p-hobbies-main" class="platform bg-accent-green">Hobbies</a>
-      <a href="aesthetic.html" id="p-aesthetic-main" class="platform bg-accent-red">Aesthetic</a>
+            <!-- Floating Platforms (The 6 main portfolio sections) -->
+            <a href="projects.html" id="p-projects" class="platform bg-primary-blue">Projects</a>
+            <a href="academic_and_extracurricular.html" id="p-academic" class="platform bg-accent-yellow text-gray-900">Academic & Extracurricular</a>
+            <a href="self_learning.html" id="p-selflearning" class="platform bg-accent-teal">Self Learning</a>
+            <a href="hobbies.html" id="p-hobbies-main" class="platform bg-accent-green">Hobbies</a>
+            <a href="aesthetic.html" id="p-aesthetic-main" class="platform bg-accent-red">Aesthetic</a>
+            <a href="notes_library.html" id="p-community-resources" class="platform bg-accent-purple">Community Resources</a>
 
-      <!-- About Me -->
-      <div id="about-me-inline">
-        <h2 class="text-4xl md:text-5xl font-extrabold text-gray-100 mb-1">
-          Amaya Devindi
-        </h2>
-    
-        <p class="max-w-xl mx-auto text-md md:text-lg text-gray-400 leading-relaxed">
-          I am a passionate explorer of technology and creativity, blending strong <b>Academic</b> foundations with real-world application in my <b>Projects</b>. I thrive on <b>Self Learning</b>, enjoy my <b>Hobbies</b>, and use my <b>Aesthetic</b> sense to design beautiful and functional experiences.
-        </p>
-      </div>
+            <!-- About Me -->
+            <div id="about-me-inline">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-100 mb-1">
+                    Amaya Devindi
+                </h2>
+                
+                <p class="max-w-xl mx-auto text-md md:text-lg text-gray-400 leading-relaxed">
+                    I am a passionate explorer of technology and creativity, blending strong <b>Academic</b> foundations with real-world application in my <b>Projects</b>. I thrive on <b>Self Learning</b>, enjoy my <b>Hobbies</b>, and use my <b>Aesthetic</b> sense to design beautiful and functional experiences.
+                </p>
+            </div>
+        </div>
+
+        
     </div>
-  </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const profile = document.getElementById('profile-center');
-      const svg = document.getElementById('connection-lines');
-      const platforms = document.querySelectorAll('.platform');
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profile = document.getElementById('profile-center');
+            const svg = document.getElementById('connection-lines');
+            // Select ONLY the elements with the 'platform' class (the 6 radial elements)
+            const platforms = document.querySelectorAll('.platform');
 
-      const colors = {
-        'p-projects': '#4c7cff',
-        'p-academic': '#fbd462',
-        'p-selflearning': '#4cd8c2',
-        'p-hobbies-main': '#55b76b',
-        'p-aesthetic-main': '#ff6f61'
-      };
+            // Map platform IDs to their colors for line drawing and hover effect
+            const colors = {
+                'p-projects': '#4c7cff',
+                'p-academic': '#fbd462',
+                'p-selflearning': '#4cd8c2',
+                'p-hobbies-main': '#55b76b',
+                'p-aesthetic-main': '#ff6f61',
+                'p-community-resources': '#a06fff', // Added new element color
+            };
 
-      const lines = {};
-      platforms.forEach(p => {
-        const color = colors[p.id] || '#ffffff';
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('stroke', color);
-        line.setAttribute('stroke-width', '4');
-        line.setAttribute('stroke-linecap', 'round');
-        line.setAttribute('opacity', '0.6');
-        svg.appendChild(line);
-        lines[p.id] = line;
-        p.style.setProperty('--hover-color', color);
-      });
+            const lines = {};
+            platforms.forEach(p => {
+                const color = colors[p.id] || '#ffffff';
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('stroke', color);
+                line.setAttribute('stroke-width', '4');
+                line.setAttribute('stroke-linecap', 'round');
+                line.setAttribute('opacity', '0.6');
+                svg.appendChild(line);
+                lines[p.id] = line;
+                p.style.setProperty('--hover-color', color);
+            });
+            
+            // Utility function to find the point on a circle's circumference closest to a target point
+            function findCircleIntersection(center, radius, target) {
+                const dx = target.x - center.x;
+                const dy = target.y - center.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                // If the distance is less than the radius, the target is inside, return center
+                if (dist < radius) return { x: center.x, y: center.y };
 
-      function updateLines() {
-        const profileRect = profile.getBoundingClientRect();
-        const profileCenterX = profileRect.left + profileRect.width / 2;
-        const profileCenterY = profileRect.top + profileRect.height / 2;
-        const svgRect = svg.getBoundingClientRect();
+                // Calculate the intersection point on the circumference
+                const ratio = radius / dist;
+                const ix = center.x - dx * ratio;
+                const iy = center.y - dy * ratio;
 
-        platforms.forEach(p => {
-          const rect = p.getBoundingClientRect();
-          const platformCenterX = rect.left + rect.width / 2;
-          const platformCenterY = rect.top + rect.height / 2;
-          const line = lines[p.id];
-          if (line) {
-            const x1 = profileCenterX - svgRect.left;
-            const y1 = profileCenterY - svgRect.top;
-            const x2 = platformCenterX - svgRect.left;
-            const y2 = platformCenterY - svgRect.top;
-            line.setAttribute('x1', x1);
-            line.setAttribute('y1', y1);
-            line.setAttribute('x2', x2);
-            line.setAttribute('y2', y2);
-          }
+                return { x: ix, y: iy };
+            }
+
+            // Utility function to find the point on a rectangle's edge closest to a target point
+            function findRectIntersection(center, rect, profileCenter) {
+                const dx = profileCenter.x - center.x;
+                const dy = profileCenter.y - center.y;
+                
+                const halfWidth = rect.width / 2;
+                const halfHeight = rect.height / 2;
+
+                let tx, ty;
+
+                // Determine if line intersects horizontal or vertical edge first
+                if (Math.abs(dx) / halfWidth > Math.abs(dy) / halfHeight) { 
+                    tx = center.x + (dx > 0 ? halfWidth : -halfWidth);
+                    ty = center.y + (dy / dx) * (tx - center.x);
+                } else { 
+                    ty = center.y + (dy > 0 ? halfHeight : -halfHeight);
+                    tx = center.x + (dx / dy) * (ty - center.y);
+                }
+                
+                // Return point relative to SVG container
+                return { x: tx - svg.getBoundingClientRect().left, y: ty - svg.getBoundingClientRect().top };
+            }
+
+            function updateLines() {
+                const profileRect = profile.getBoundingClientRect();
+                const svgRect = svg.getBoundingClientRect();
+                
+                // Profile center relative to the SVG container
+                const profileCenter = {
+                    x: profileRect.left + profileRect.width / 2 - svgRect.left,
+                    y: profileRect.top + profileRect.height / 2 - svgRect.top
+                };
+                const profileRadius = profileRect.width / 2;
+
+                platforms.forEach(p => {
+                    const rect = p.getBoundingClientRect();
+                    
+                    // Platform center relative to the SVG container
+                    const platformCenter = {
+                        x: rect.left + rect.width / 2 - svgRect.left,
+                        y: rect.top + rect.height / 2 - svgRect.top
+                    };
+                    
+                    // 1. Calculate the start point on the platform's edge
+                    const pStartPoint = findRectIntersection(
+                        platformCenter,
+                        rect,
+                        { x: profileCenter.x, y: profileCenter.y }
+                    );
+
+                    // 2. Calculate the end point on the profile's edge
+                    const profileEndPoint = findCircleIntersection(
+                        profileCenter, 
+                        profileRadius, 
+                        pStartPoint
+                    );
+
+                    const line = lines[p.id];
+                    // Only draw lines if we are in the desktop radial view
+                    if (line && window.innerWidth > 768) { 
+                        line.setAttribute('x1', pStartPoint.x);
+                        line.setAttribute('y1', pStartPoint.y);
+                        line.setAttribute('x2', profileEndPoint.x);
+                        line.setAttribute('y2', profileEndPoint.y);
+                        line.style.display = 'block'; // Show line
+                    } else if (line) {
+                         line.style.display = 'none'; // Hide line in mobile stacking view
+                    }
+                });
+
+                // Continue redrawing lines only if elements are floating (desktop view)
+                if (window.innerWidth > 768) {
+                    requestAnimationFrame(updateLines);
+                }
+            }
+
+            // Initial drawing and redraw on resize
+            // We use setTimeout here to ensure all elements have rendered and taken their final positions
+            setTimeout(updateLines, 50); 
+            window.addEventListener('resize', () => {
+                let timer;
+                clearTimeout(timer);
+                timer = setTimeout(updateLines, 50);
+            });
+            
+            // Start the continuous loop for the desktop floating animation
+            if (window.innerWidth > 768) {
+                requestAnimationFrame(updateLines);
+            }
         });
-
-        requestAnimationFrame(updateLines);
-      }
-
-      updateLines();
-    });
-  </script>
+    </script>
 </body>
 </html>
