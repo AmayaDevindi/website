@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Resources</title>
+    <link rel="icon" type="image/svg+xml" href="images/community_resourses/icon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#4c7cff',
+                        'accent-purple': '#a06fff',
+                        'accent-green': '#55b76b',
+                        'accent-yellow': '#fbd462',
+                        'accent-red': '#ff6f61',
+                        'accent-teal': '#4cd8c2',
+                        'dark-bg': '#000',
+                        'card-bg': '#1a1a1a',
+                        'light-text': '#f0f4f8',
+                        'muted-text': '#9ca3af',
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #f0f4f8;
+            min-height: 100vh;
+        }
+        .resource-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 1.5rem; /* Larger border radius */
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(76, 124, 255, 0.15);
+            border-color: #4c7cff;
+        }
+        .back-button {
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            transform: scale(1.02);
+            background-color: #5d8bff;
+        }
+        /* Style for the internal subject buttons */
+        .subject-link {
+            transition: all 0.2s;
+        }
+        .subject-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding-left: 1.25rem; /* Subtle movement on hover */
+        }
+    </style>
+</head>
+
+<body class="p-4 sm:p-12 pb-20"> <!-- Added padding-bottom to ensure content doesn't hit the very edge -->
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Header: Centered title at the top, removed back button. -->
+        <header class="flex flex-col items-center justify-center mb-10 mt-4">
+            
+            <!-- 1. Title/Description (Centered) -->
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-accent-purple mb-2">
+                    Community Resources
+                </h1>
+                <p class="text-muted-text text-lg">Hi there! Here you’ll find the notes and study materials I used during my own studies. I hope they help you understand the concepts better and make your learning easier.</p>
+            </div>
+        </header>
+
+        <!-- Main Content: Two Big Cards -->
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            
+            <!-- CARD 1: Ordinary Level (O/L) -->
+            <div class="resource-card p-8 bg-card-bg border border-gray-800 flex flex-col relative overflow-hidden group">
+                <!-- Decorative background glow -->
+                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-accent-purple opacity-10 rounded-full blur-3xl group-hover:opacity-20 transition-opacity"></div>
+
+                <div class="flex items-center mb-8">
+                    <div class="p-3 bg-accent-purple/10 rounded-xl mr-4 text-accent-purple">
+                        <!-- Icon: Graduation Cap / School -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">Ordinary Level <span class="text-accent-purple">(O/L)</span></h2>
+                </div>
+
+                <div class="space-y-3 flex-grow">
+                    <!-- Mathematics -->
+                    <a href="community_resourses/ol/ol_maths.html" target="_blank" class="subject-link block p-4 rounded-xl border border-gray-700 bg-gray-900/50 flex items-center group-hover:border-gray-600">
+                        <span class="p-2 bg-blue-500/20 rounded-lg text-blue-400 mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+                        </span>
+                        <span class="text-lg font-medium text-gray-200">Mathematics</span>
+                    </a>
+
+                    <!-- ICT -->
+                    <a href="community_resourses/ol/ol_ict.html" target="_blank" class="subject-link block p-4 rounded-xl border border-gray-700 bg-gray-900/50 flex items-center group-hover:border-gray-600">
+                        <span class="p-2 bg-green-500/20 rounded-lg text-green-400 mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                        </span>
+                        <span class="text-lg font-medium text-gray-200">ICT</span>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- CARD 2: Advanced Level (A/L) -->
+            <div class="resource-card p-8 bg-card-bg border border-gray-800 flex flex-col relative overflow-hidden group">
+                <!-- Decorative background glow -->
+                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-accent-teal opacity-10 rounded-full blur-3xl group-hover:opacity-20 transition-opacity"></div>
+
+                <div class="flex items-center mb-8">
+                    <div class="p-3 bg-accent-teal/10 rounded-xl mr-4 text-accent-teal">
+                        <!-- Icon: Book / Atom -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white">Advanced Level <span class="text-accent-teal">(A/L)</span></h2>
+                </div>
+
+                <div class="space-y-3 flex-grow">
+                    <!-- Combined Maths -->
+                    <a href="community_resourses/al/al_com_maths.html"  target="_blank" class="subject-link block p-4 rounded-xl border border-gray-700 bg-gray-900/50 flex items-center group-hover:border-gray-600">
+                        <span class="p-2 bg-red-500/20 rounded-lg text-red-400 mr-4">
+                            <!-- Icon: Function/Math -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h4l1.5 6 3-6h5"/><path d="M4 14h16"/><path d="M4 18h16"/><path d="M10 14v8"/></svg>
+                        </span>
+                        <span class="text-lg font-medium text-gray-200">Combined Maths</span>
+                    </a>
+
+                    <!-- ICT -->
+                    <a href="community_resourses/al/al_ict.html"  target="_blank" class="subject-link block p-4 rounded-xl border border-gray-700 bg-gray-900/50 flex items-center group-hover:border-gray-600">
+                        <span class="p-2 bg-green-500/20 rounded-lg text-green-400 mr-4">
+                            <!-- Icon: Code -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                        </span>
+                        <span class="text-lg font-medium text-gray-200">ICT</span>
+                    </a>
+
+                    <!-- Physics -->
+                    <a href="community_resourses/al/al_physics.html"  target="_blank" class="subject-link block p-4 rounded-xl border border-gray-700 bg-gray-900/50 flex items-center group-hover:border-gray-600">
+                        <span class="p-2 bg-purple-500/20 rounded-lg text-purple-400 mr-4">
+                            <!-- Icon: Atom -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5z"/></svg>
+                        </span>
+                        <span class="text-lg font-medium text-gray-200">Physics</span>
+                    </a>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+</body>
+</html>

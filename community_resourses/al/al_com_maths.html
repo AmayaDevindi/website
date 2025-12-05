@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AL - Combined Mathematics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#4c7cff',
+                        'accent-purple': '#a06fff',
+                        'dark-bg': '#000',
+                        'card-bg': '#1a1a1a',
+                        'light-text': '#f0f4f8',
+                        'muted-text': '#9ca3af',
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: #f0f4f8;
+            min-height: 100vh;
+        }
+        /* Custom styles for the accordion */
+        /* Default state: max-height: 0 ensures content is hidden on load */
+        .lesson-content {
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            max-height: 0; 
+            overflow: hidden; /* Ensure content overflow is hidden when collapsed */
+        }
+        .lesson-content.active {
+            padding-top: 1rem;
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .rotate-180 {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="p-4 sm:p-12 pb-20">
+    <div class="max-w-4xl mx-auto">
+
+        <!-- Header and Title -->
+        <header class="text-center mb-12 mt-8">
+            <h1 class="text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-accent-purple mb-3">
+                Combined Mathematics <span class="text-3xl sm:text-4xl block sm:inline-block text-gray-400 font-semibold">(Advanced Level)</span>
+            </h1>
+        </header>
+
+        <!-- Brief Description Card -->
+        <section class="bg-card-bg p-6 sm:p-8 rounded-2xl border border-gray-800 shadow-xl mb-12">
+            <h2 class="text-2xl font-bold mb-3 text-light-text">Resource Overview</h2>
+            <p class="text-muted-text text-lg leading-relaxed">
+                This comprehensive collection covers all key syllabi topics including Algebra, Geometry, and crucial Exam Techniques for the O/L Mathematics paper. Resources include structured notes, step-by-step solutions for complex problems, and focused practice modules.
+            </p>
+        </section>
+
+        <!-- Collapsible Lesson List (Accordion) -->
+        <section class="bg-card-bg p-6 sm:p-8 rounded-2xl border border-gray-800">
+            <h2 class="text-2xl font-bold mb-6 text-light-text">Lesson Modules</h2>
+
+            <div class="lesson-accordion divide-y divide-gray-800">
+                
+                <!-- Lesson 1: Set Theory -->
+                <div class="lesson-item">
+                    <button class="lesson-header w-full flex justify-between items-center py-4 text-xl font-semibold text-gray-200 hover:text-primary-blue transition duration-200 focus:outline-none"
+                            onclick="toggleLesson(this)">
+                        <span>1. අනුකලනය (Integration)</span>
+                        <span class="arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                        </span>
+                    </button>
+                    <div class="lesson-content">
+                        <div class="p-4 bg-gray-900 rounded-xl mb-4">
+                            <p class="text-muted-text mb-4">Detailed notes and exercises on basic set notation, operations (union, intersection, complement), and Venn diagrams, tailored for the O/L syllabus.</p>
+                            <a href="community_resourses/al/pdfs/al_com_maths/Integration.pdf" target="_blank" 
+                               class="inline-flex items-center text-primary-blue hover:text-accent-purple font-medium underline">
+                                View & Download Lesson PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lesson 2: Quadratic Equations -->
+                <div class="lesson-item">
+                    <button class="lesson-header w-full flex justify-between items-center py-4 text-xl font-semibold text-gray-200 hover:text-primary-blue transition duration-200 focus:outline-none"
+                            onclick="toggleLesson(this)">
+                        <span>2. Quadratic Equations (වර්ගජ සමීකරණ)</span>
+                        <span class="arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                        </span>
+                    </button>
+                    <div class="lesson-content">
+                        <div class="p-4 bg-gray-900 rounded-xl mb-4">
+                            <p class="text-muted-text mb-4">Solving quadratic equations using factorization and the quadratic formula. Emphasis on nature of roots and graphical representation.</p>
+                            <a href="https://placehold.co/1x1?text=PDF_LINK_FOR_QUADRATIC_EQUATIONS" target="_blank" download="OL_Mathematics_Quadratic_Equations.pdf"
+                               class="inline-flex items-center text-primary-blue hover:text-accent-purple font-medium underline">
+                                View & Download Lesson PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lesson 3: Trigonometry -->
+                <div class="lesson-item">
+                    <button class="lesson-header w-full flex justify-between items-center py-4 text-xl font-semibold text-gray-200 hover:text-primary-blue transition duration-200 focus:outline-none"
+                            onclick="toggleLesson(this)">
+                        <span>3. Trigonometry (ත්‍රිකෝණමිතිය)</span>
+                        <span class="arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                        </span>
+                    </button>
+                    <div class="lesson-content">
+                        <div class="p-4 bg-gray-900 rounded-xl mb-4">
+                            <p class="text-muted-text mb-4">Basic trigonometric ratios (SOH CAH TOA), angles of elevation and depression, and solving right-angled triangles.</p>
+                            <a href="https://placehold.co/1x1?text=PDF_LINK_FOR_TRIGONOMETRY" target="_blank" download="OL_Mathematics_Trigonometry.pdf"
+                               class="inline-flex items-center text-primary-blue hover:text-accent-purple font-medium underline">
+                                View & Download Lesson PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function toggleLesson(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('.arrow');
+            
+            // Only collapse others if we are expanding a new one
+            if (!content.classList.contains('active')) {
+                // Collapse all active lessons first
+                document.querySelectorAll('.lesson-content.active').forEach(activeContent => {
+                    activeContent.style.maxHeight = null;
+                    activeContent.classList.remove('active');
+                    // Reset arrow of the collapsed one
+                    activeContent.previousElementSibling.querySelector('.arrow').classList.remove('rotate-180');
+                });
+            }
+
+
+            if (content.classList.contains('active')) {
+                // Collapse this one
+                content.style.maxHeight = null;
+                content.classList.remove('active');
+                arrow.classList.remove('rotate-180');
+            } else {
+                // Expand this one
+                // Use scrollHeight to set max-height dynamically based on content size
+                content.style.maxHeight = content.scrollHeight + 30 + "px"; // +30 for safe padding
+                content.classList.add('active');
+                arrow.classList.add('rotate-180');
+            }
+        }
+    </script>
+</body>
+</html>
