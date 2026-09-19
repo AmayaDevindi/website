@@ -372,6 +372,15 @@ function buildAcademic() {
     </div>`;
   }).join("\n");
 
+  const achievementCards = (data.achievements || []).map((a) => `
+    <div class="card card-hover reveal" style="overflow:hidden; display:flex; flex-direction:column;">
+      ${a.image ? `<img src="${esc(a.image)}" alt="${esc(a.title)}" data-lightbox-url="${esc(a.image)}" style="width:100%; height:180px; object-fit:cover; border-bottom:1px solid var(--border); cursor:pointer;">` : ""}
+      <div style="padding:20px;">
+        <h3 style="font-size:1.1rem; margin-bottom:8px;"><i class="fas fa-award" style="color:var(--accent); margin-right:8px;"></i>${esc(a.title)}</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">${esc(a.note)}</p>
+      </div>
+    </div>`).join("\n");
+
   const extraCards = data.extracurriculars.map((x) => {
     const n = x.images.length;
     const countClass = n === 1 ? "count-1" : n === 2 ? "count-2" : "count-4";
@@ -414,6 +423,12 @@ function buildAcademic() {
     <h2 class="section-heading" style="font-size:1.6rem;">Language Proficiency</h2>
     <div class="grid-2">${langCards}</div>
   </div>
+
+  ${achievementCards ? `
+  <div class="section-tight">
+    <h2 class="section-heading" style="font-size:1.6rem;">Competitions &amp; Achievements</h2>
+    <div class="grid-3">${achievementCards}</div>
+  </div>` : ""}
 </div>
 
 <div class="section-tight" style="background:var(--surface-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">

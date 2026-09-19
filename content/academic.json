@@ -94,6 +94,15 @@
         { "name": "2016", "url": "images/academic_and_extra/sport_cer_2.jpg" }
       ],
       "note": "Active involvement in university and school sport events."
+    },
+    {
+      "title": "Ecovision Business Case Challenge 2026",
+      "icon": "fa-briefcase",
+      "span": 1,
+      "images": [
+        { "name": "2026", "url": "images/academic_and_extra/ecovision_business_case_2026.jpg" }
+      ],
+      "note": "Participated in the preliminary round of Ecovision 2026, an inter-university Business Case Competition organized by Universal College Lanka (UCL) in partnership with the MAS Foundation for Change, along with the accompanying Workshop on Social Impact Entrepreneurship."
     }
   ]
 }
