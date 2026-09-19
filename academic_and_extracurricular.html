@@ -47,6 +47,7 @@
   <p>A unified reflection of my academic dedication and active engagement in diverse extracurricular pursuits.</p>
 </div>
 
+<<<<<<< HEAD
 <div class="container" data-reveal>
   <div class="section-tight">
     <h2 class="section-heading" style="font-size:1.6rem;">Education Journey</h2>
@@ -61,6 +62,75 @@
         <span class="badge"><i class="fas fa-clock"></i> 2025 – Present</span>
         <span class="badge status-pending"><i class="fas fa-hourglass-half"></i> Studying</span>
       </div>
+=======
+        <!-- 1. ACADEMIC ACCOMPLISHMENTS (STACKED LAYOUT) -->
+        <section id="academic" class="py-16 px-4">
+            <h2 class="section-title">ACADEMIC PORTFOLIO</h2>
+            
+            <div class="max-w-6xl mx-auto space-y-12">
+            
+                <!-- 1.1 EDUCATION HISTORY (CARD GRID STRUCTURE - TEXT-ONLY) -->
+                <div>
+                    <h3 class="text-3xl font-bold text-academic-blue mb-6 border-b border-academic-blue/30 pb-2 flex items-center">
+                        <i class="fas fa-university mr-3"></i> Education Journey
+                    </h3>
+                    <div id="education-history-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Education history cards will be rendered here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- 1.2 CORE ACADEMIC RESULTS (Custom Layout RENDERED BY JS) -->
+                <div>
+                    <h3 class="text-3xl font-bold text-academic-blue mb-6 border-b border-academic-blue/30 pb-2 flex items-center">
+                        <i class="fas fa-chart-bar mr-3"></i> Core Academic Results & Certifications
+                    </h3>
+                    <div id="academic-results-container" class="w-full">
+                        <!-- Academic achievement cards will be rendered here by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- 1.3 LANGUAGE PROFICIENCY -->
+                <div>
+                    <h3 class="text-3xl font-bold text-academic-blue mb-6 border-b border-academic-blue/30 pb-2 flex items-center">
+                        <i class="fas fa-language mr-2"></i> Language Proficiency
+                    </h3>
+                    <!-- Container uses a 2-column grid on medium screens and up, with English spanning both -->
+                    <div id="languages-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Language list will be rendered here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 2. EXTRACURRICULARS & SPORTS -->
+        <section id="extracurriculars" class="py-16 px-4 bg-card-bg">
+            <h2 class="section-title">EXTRACURRICULAR ACTIVITIES</h2>
+            <p class="text-lg text-secondary-text max-w-3xl mb-8 mx-auto text-center">
+                Showcasing consistent participation in various school events and activities.
+            </p>
+            
+            <!-- Updated the container to use a standard responsive grid for dynamic spanning -->
+            <div id="extracurricular-container" class="max-w-7xl mx-auto">
+                <!-- Extracurricular items will be rendered here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Structure (Lightbox for Image Popup) -->
+    <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 transition-opacity duration-300" onclick="closeModal()">
+        <div class="relative max-w-5xl w-[90%] h-[90%]" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-light-text text-4xl p-2 z-10 bg-card-bg/70 rounded-full hover:bg-sports-red transition duration-300 focus:outline-none shadow-lg">
+                <i class="fas fa-times"></i>
+            </button>
+            <!-- Image Container -->
+            <div class="w-full h-full p-8 flex items-center justify-center">
+                <!-- The image source will be set dynamically by JavaScript -->
+                <img id="modalImage" src="" alt="Enlarged view" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+            </div>
+        </div>
+>>>>>>> parent of c445d35 (update university certificates)
     </div>
 
     <div class="card card-hover edu-card reveal">
@@ -189,6 +259,7 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <div class="section-tight" style="background:var(--surface-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
   <div class="container" data-reveal>
     <h2 class="section-heading" style="font-size:1.6rem; text-align:center;">Extracurricular Activities</h2>
@@ -199,6 +270,70 @@
       <div style="padding:22px;">
         <h3 style="font-size:1.15rem; display:flex; align-items:center; gap:10px; margin-bottom:8px;"><i class="fas fa-brush" style="color:var(--accent);"></i> Art Exhibitions &amp; Competitions</h3>
         <p style="color:var(--text-muted); font-size:0.9rem;">Active participation and multiple achievements in school art exhibitions and competitions over the years.</p>
+=======
+        // Extracurricular/Sports Data - UPDATED FOR DYNAMIC SPANNING AND MULTIPLE IMAGES
+        const extracurricularData = [
+            {
+                // 1. ART EXHIBITIONS: SPAN 3, 4 IMAGES (full row)
+                title: "Art Exhibitions & Competitions",
+                type: "creative",
+                icon: "fa-brush text-sports-red",
+                span: 3, // Full row on large screens
+                images: [ 
+                    { name: "2020", url: "images/academic_and_extra/art_cer_3.jpg" }, 
+                    { name: "2018", url: "images/academic_and_extra/art_cer_4.jpg" }, 
+                    { name: "2023", url: "images/academic_and_extra/art_cer_2.jpg" }, 
+                    { name: "2021", url: "images/academic_and_extra/art_cer_1.jpg" } 
+                ],
+                stats: [
+                    { name: "Click to View", grade: `<a href="aesthetic.html" class="text-sports-red underline hover:text-red-400 transition">Art Gallery</a>` }
+                ],
+                participation_focus: "Active participation and multiple achievements in school art exhibitions and competitions over the years."
+            },
+            {
+                // 2. SWIMMING: SPAN 1, 1 IMAGE (one column)
+                title: "Swimming",
+                type: "sports",
+                icon: "fa-water",
+                span: 1, // Single column on large screens
+                images: [
+                    { name: "Swimming", url: "images/academic_and_extra/swim.png" }
+                ],
+                stats: [
+                    { name: "Duration", grade: "2+ Yrs" },
+                  //{ name: "Focus", grade: "Fitness" } 
+                ],
+                participation_focus: "Consistent engagement in swimming activities over two years."
+            },
+            {
+                // 3. ANNUAL SPORTS: SPAN 2, 2 IMAGES (two columns)
+                title: "School Sports Events",
+                type: "sports",
+                icon: "fa-running",
+                span: 2, // one columns on large screens
+                images: [
+                    { name: "2019", url: "images/academic_and_extra/sport_cer_1.jpg" },
+                    { name: "2016", url: "images/academic_and_extra/sport_cer_2.jpg" }
+                ],
+                stats: [
+                   //{ name: "Schedule", grade: "Annual" },
+                   //{ name: "Role", grade: "House Rep." }
+                ],
+                participation_focus: "Active involvement in school sport events."
+            }
+        ];
+
+        // Helper function to generate the standard small stat box (two lines)
+        const standardStatBox = (stat) => `
+            <div class="stat-subject-box text-center p-2 rounded-lg bg-main-bg/50 border border-white/10">
+                <p class="text-xs text-secondary-text uppercase truncate">${stat.name}</p>
+                <p class="text-xl font-black ${stat.name === 'Z-Score' ? 'text-accent-yellow' : 'text-light-text'}">${stat.grade}</p>
+            </div>
+        `;
+
+
+        // --- RENDERING FUNCTIONS (ACADEMIC - REMAINS UNCHANGED) ---
+>>>>>>> parent of c445d35 (update university certificates)
         
         <div style="margin-top:12px;"><a class="btn btn-outline btn-sm" href="aesthetic.html">Art Gallery <i class="fas fa-arrow-right"></i></a></div>
       </div>
