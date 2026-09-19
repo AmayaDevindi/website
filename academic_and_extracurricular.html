@@ -1,765 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic & Extracurricular</title>
-    <link rel="icon" type="image/svg+xml" href="images/academic_and_extra/icon.svg">
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Load Inter font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght300;500;700;900&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { 
-                        'main-bg': '#1A1A1A',        /* Deep Black/Gray */
-                        'card-bg': '#282828',        /* Slightly Lighter Dark */
-                        'accent-yellow': '#FFC300',  /* Vibrant Gold/Yellow */
-                        'light-text': '#F0F0F0',     /* Near White */
-                        'secondary-text': '#A0A0A0', /* Gray */
-                        'academic-blue': '#4E93FF',  /* Blue for formal titles */
-                        'sports-red': '#E94F64',     /* Red for sports energy (used for all extracurriculars) */
-                        'status-pending': '#F97316', /* Orange for Waiting */
-                        'status-finished': '#10B981', /* Green for Finished */
-                    },
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                }
-            }
-        }
-    </script>
-    <style>
-        /* BASE STYLES */
-        body { 
-            background-color: #1A1A1A; 
-            color: #F0F0F0; 
-            font-family: 'Inter', sans-serif; 
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #FFC300;
-            text-shadow: 0 0 10px rgba(255, 195, 0, 0.4);
-        }
-
-        /* --- GLOW EFFECTS --- */
-        
-        /* Academic Card Glow (Blue) */
-        .academic-glow {
-            transition: all 0.3s ease-in-out;
-            border-color: transparent !important; /* Base transparency */
-        }
-        .academic-glow:hover {
-            box-shadow: 0 0 30px rgba(78, 147, 255, 0.7), 0 10px 25px rgba(0, 0, 0, 0.7); /* Blue Glow + Stronger Shadow */
-            border-color: #4E93FF !important;
-            transform: translateY(-5px); /* Lift slightly on hover */
-        }
-
-        /* Extracurricular Card Glow (Red) */
-        .extracurricular-glow:hover {
-            box-shadow: 0 0 30px rgba(233, 79, 100, 0.7), 0 10px 25px rgba(0, 0, 0, 0.7); /* Red Glow + Stronger Shadow */
-            border-color: #E94F64 !important;
-            transform: translateY(-5px);
-        }
-
-        /* Subject/Stat Box Hover Effect (Yellow Accent) */
-        .stat-subject-box, .cert-link-box {
-            transition: all 0.2s ease-in-out;
-            transform: translateZ(0); /* Force hardware acceleration */
-        }
-        .stat-subject-box:hover {
-            transform: scale(1.05);
-            background-color: #3C3C3C !important; 
-            border-color: #FFC300 !important; /* Accent border */
-            box-shadow: 0 0 10px rgba(255, 195, 0, 0.5); /* Subtle Yellow glow */
-            z-index: 10;
-        }
-        
-        /* Certificate Link Box Hover Effect (Academic Blue Accent) */
-        .cert-link-box:hover {
-            transform: scale(1.05);
-            background-color: #3C3C3C !important;
-            border-color: #4E93FF !important; /* Blue border */
-            box-shadow: 0 0 10px rgba(78, 147, 255, 0.5); /* Blue glow */
-            z-index: 10;
-        }
-
-        /* General Card Styling for Grid Items */
-        .base-card {
-            background-color: #282828;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            height: 100%; /* Ensures all cards in a grid row have equal height */
-        }
-        
-        /* Ensure images fit within their containers but are clickable */
-        .image-container {
-            position: relative;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .image-container img {
-            object-fit: contain; /* Ensures the whole image is visible */
-            cursor: pointer;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Academic &amp; Extracurricular — Amaya Devindi</title>
+<meta name="description" content="Education history, grades, languages and extracurricular activities." />
+<link rel="icon" type="image/svg+xml" href="images/academic_and_extra/icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/site.css" />
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<!-- This file is generated by scripts/build.mjs — edit the templates/content files instead. -->
 </head>
-<body onload="initPortfolio()">
-
-    <!-- Fixed "Back to Home" Button -->
-    <a href="about_me.html" class="fixed z-50 top-6 left-6 px-4 py-2 rounded-full font-bold text-accent-yellow border-2 border-accent-yellow bg-transparent text-sm 
-        hover:bg-accent-yellow hover:text-main-bg transition duration-300 shadow-lg">
-        <i class="fas fa-arrow-left mr-1"></i> Home
+<body data-section="academic">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-nav">
+  <div class="container">
+    <a class="brand" href="about_me.html">
+      <span class="brand-mark">AD</span>
+      <span>Amaya Devindi</span>
     </a>
+    <nav class="nav-links" data-nav-links>
+      <a class="nav-link" href="about_me.html">Home</a>
+      <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link is-active" href="academic_and_extracurricular.html">Academic &amp; Extracurricular</a>
+        <a class="nav-link" href="self_learning.html">Self Learning</a>
+        <a class="nav-link" href="hobbies.html">Hobbies</a>
+        <a class="nav-link" href="aesthetic.html">Aesthetic</a>
+        <a class="nav-link" href="community_resourses/community_resourses.html">Community Resources</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode" type="button">
+        <i class="fas fa-sun icon-sun"></i>
+        <i class="fas fa-moon icon-moon"></i>
+      </button>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" type="button"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+<main id="main">
 
-    <main class="min-h-screen">
-        <!-- HERO / INTRO SECTION -->
-        <section id="intro" class="pt-5 pb-5 pl-60 pr-60 px-4 flex flex-col items-center justify-center text-center bg-card-bg border-b-4 border-accent-yellow relative min-h-[90vh]">
-            
-            <h1 class="text-5xl md:text-6xl font-black mb-3 text-light-text leading-tight">
-                <span class="text-accent-yellow">Bridging academics and activities to shape a <br>well-rounded journey.</span>
-            </h1>
-            <p class="text-lg text-secondary-text max-w-3xl mb-8">
-                A unified reflection of my academic dedication and active engagement in diverse extracurricular pursuits.
-            </p>
-            <div class="flex gap-4 flex-wrap justify-center">
-                <a href="#academic" class="px-8 py-3 rounded-full font-bold bg-accent-yellow text-main-bg hover:bg-yellow-600 transition duration-300 shadow-lg shadow-accent-yellow/50">
-                    <i class="fas fa-scroll mr-2"></i> Academic Records
-                </a>
-                <a href="#extracurriculars" class="px-8 py-3 rounded-full font-bold text-light-text border-2 border-sports-red hover:bg-sports-red transition duration-300 shadow-lg shadow-sports-red/40">
-                    <i class="fas fa-medal mr-2"></i> Extracurricular Focus
-                </a>
-            </div>
-        </section>
+<div class="page-header container" data-section="academic">
+  <div class="eyebrow"><i class="fas fa-graduation-cap"></i> Academic &amp; Extracurricular</div>
+  <h1>Bridging academics and activities to shape a well-rounded journey.</h1>
+  <p>A unified reflection of my academic dedication and active engagement in diverse extracurricular pursuits.</p>
+</div>
 
-        <!-- 1. ACADEMIC ACCOMPLISHMENTS (STACKED LAYOUT) -->
-        <section id="academic" class="py-16 px-4">
-            <h2 class="section-title">ACADEMIC PORTFOLIO</h2>
-            
-            <div class="max-w-6xl mx-auto space-y-12">
-            
-                <!-- 1.1 EDUCATION HISTORY (CARD GRID STRUCTURE - TEXT-ONLY) -->
-                <div>
-                    <h3 class="text-3xl font-bold text-academic-blue mb-6 border-b border-academic-blue/30 pb-2 flex items-center">
-                        <i class="fas fa-university mr-3"></i> Education Journey
-                    </h3>
-                    <div id="education-history-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Education history cards will be rendered here by JavaScript -->
-                    </div>
-                </div>
-
-                <!-- 1.2 CORE ACADEMIC RESULTS (Custom Layout RENDERED BY JS) -->
-                <div>
-                    <h3 class="text-3xl font-bold text-academic-blue mb-6 border-b border-academic-blue/30 pb-2 flex items-center">
-                        <i class="fas fa-chart-bar mr-3"></i> Core Academic Results & Certifications
-                    </h3>
-                    <div id="academic-results-container" class="w-full">
-                        <!-- Academic achievement cards will be rendered here by JavaScript -->
-                    </div>
-                </div>
-                
-                <!-- 1.3 LANGUAGE PROFICIENCY -->
-                <div>
-                    <h3 class="text-3xl font-bold text-academic-blue mb-6 border-b border-academic-blue/30 pb-2 flex items-center">
-                        <i class="fas fa-language mr-2"></i> Language Proficiency
-                    </h3>
-                    <!-- Container uses a 2-column grid on medium screens and up, with English spanning both -->
-                    <div id="languages-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Language list will be rendered here by JavaScript -->
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- 2. EXTRACURRICULARS & SPORTS -->
-        <section id="extracurriculars" class="py-16 px-4 bg-card-bg">
-            <h2 class="section-title">EXTRACURRICULAR ACTIVITIES</h2>
-            <p class="text-lg text-secondary-text max-w-3xl mb-8 mx-auto text-center">
-                Showcasing consistent participation in various university and school events and activities.
-            </p>
-            
-            <!-- Updated the container to use a standard responsive grid for dynamic spanning -->
-            <div id="extracurricular-container" class="max-w-7xl mx-auto">
-                <!-- Extracurricular items will be rendered here by JavaScript -->
-            </div>
-        </section>
-    </main>
-
-    <!-- Modal Structure (Lightbox for Image Popup) -->
-    <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 transition-opacity duration-300" onclick="closeModal()">
-        <div class="relative max-w-5xl w-[90%] h-[90%]" onclick="event.stopPropagation()">
-            <!-- Close Button -->
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-light-text text-4xl p-2 z-10 bg-card-bg/70 rounded-full hover:bg-sports-red transition duration-300 focus:outline-none shadow-lg">
-                <i class="fas fa-times"></i>
-            </button>
-            <!-- Image Container -->
-            <div class="w-full h-full p-8 flex items-center justify-center">
-                <!-- The image source will be set dynamically by JavaScript -->
-                <img id="modalImage" src="" alt="Enlarged view" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
-            </div>
-        </div>
+<div class="container" data-reveal>
+  <div class="section-tight">
+    <h2 class="section-heading" style="font-size:1.6rem;">Education Journey</h2>
+    <div class="grid-3">
+    <div class="card card-hover edu-card reveal">
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+        <h3 style="font-size:1.1rem;">University of Moratuwa</h3>
+        <span class="badge">University</span>
+      </div>
+      <p style="color:var(--text-muted); font-size:0.9rem;">Studies in Business Science.</p>
+      <div class="badge-row">
+        <span class="badge"><i class="fas fa-clock"></i> 2025 – Present</span>
+        <span class="badge status-pending"><i class="fas fa-hourglass-half"></i> Studying</span>
+      </div>
     </div>
 
+    <div class="card card-hover edu-card reveal">
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+        <h3 style="font-size:1.1rem;">Sirimavo Bandaranaike Vidyalaya, Colombo</h3>
+        <span class="badge">School</span>
+      </div>
+      
+      <div class="badge-row">
+        <span class="badge"><i class="fas fa-clock"></i> 2016 – 2023</span>
+        <span class="badge status-ok"><i class="fas fa-check-circle"></i> Finished</span>
+      </div>
+    </div>
 
-    <script>
-        // --- MODAL FUNCTIONS ---
-        // Global references for modal elements
-        const imageModal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
+    <div class="card card-hover edu-card reveal">
+      <div style="display:flex; justify-content:space-between; gap:10px; align-items:flex-start;">
+        <h3 style="font-size:1.1rem;">Seventh-Day Adventist High School, Kandana</h3>
+        <span class="badge">School</span>
+      </div>
+      
+      <div class="badge-row">
+        <span class="badge"><i class="fas fa-clock"></i> 2011 – 2016</span>
+        <span class="badge status-ok"><i class="fas fa-check-circle"></i> Finished</span>
+      </div>
+    </div></div>
+  </div>
 
-        /**
-         * Opens the full-screen modal with the specified image URL.
-         * @param {string} imageUrl The URL of the image to display.
-         */
-        function openModal(imageUrl) {
-            modalImage.src = imageUrl;
-            imageModal.classList.remove('hidden');
-            imageModal.classList.add('flex');
-            // Prevent scrolling the background content
-            document.body.style.overflow = 'hidden'; 
-        }
+  <div class="section-tight">
+    <h2 class="section-heading" style="font-size:1.6rem;">Core Academic Results</h2>
+    <div class="grid-2">
+    <div class="card card-hover result-card reveal">
+      <h3 style="font-size:1.1rem;">Advanced Level Examination (A/L)</h3>
+      <img src="images/academic_and_extra/AL.png" alt="Advanced Level Examination (A/L)" data-lightbox-url="images/academic_and_extra/AL.png" onerror="this.style.display='none';">
+      <div class="stats-grid">
+    <div class="stat-box"><div class="k">Com. Math</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">Physics</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">ICT</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">Gen. Eng.</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">Z-Score</div><div class="v">2.1882</div></div>
+  </div>
+    </div>
 
-        /**
-         * Closes the full-screen modal.
-         */
-        function closeModal() {
-            imageModal.classList.remove('flex');
-            imageModal.classList.add('hidden');
-            modalImage.src = ''; // Clear the image source
-            document.body.style.overflow = ''; // Restore background scrolling
-        }
+    <div class="card card-hover result-card reveal">
+      <h3 style="font-size:1.1rem;">Ordinary Level Examination (O/L)</h3>
+      <img src="images/academic_and_extra/OL.png" alt="Ordinary Level Examination (O/L)" data-lightbox-url="images/academic_and_extra/OL.png" onerror="this.style.display='none';">
+      <div class="stats-grid">
+    <div class="stat-box"><div class="k">Sinhala</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">Math</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">Science</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">History</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">English</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">Catholicism</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">Art</div><div class="v">A</div></div>
+  
+    <div class="stat-box"><div class="k">Tamil</div><div class="v">B</div></div>
+  
+    <div class="stat-box"><div class="k">ICT</div><div class="v">A</div></div>
+  </div>
+    </div></div>
+    <div style="display:flex; flex-direction:column; gap:14px; margin-top:14px;">
+    <div class="card card-hover reveal" style="padding:18px 24px; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+      <h3 style="font-size:1.05rem;"><i class="fas fa-trophy" style="color:var(--accent); margin-right:10px;"></i>Grade 5 Scholarship Exam</h3>
+      <div style="display:flex; gap:10px;">
+    <div class="stat-box"><div class="k">Score</div><div class="v">179/200</div></div>
+  </div>
+    </div></div>
+  </div>
 
-        // --- DATA MODELS ---
+  <div class="section-tight">
+    <h2 class="section-heading" style="font-size:1.6rem;">Language Proficiency</h2>
+    <div class="grid-2">
+    <div class="card card-hover lang-card reveal">
+      <h3 style="font-size:1.3rem;">Sinhala</h3>
+      <p style="color:var(--text-muted); font-size:0.9rem;">Native Speaker</p>
+    </div>
 
-        // NEW Comprehensive Academic Structure
-        const academicPortfolio = {
-            // Original Academic Results (now displayed in a custom layout)
-            results: [
-                { 
-                    title: "Advanced Level Examination (A/L)", 
-                    icon: "fa-calculator",
-                    // REPLACE THIS URL with your A/L Certificate Image URL
-                    imageUrl: "images/academic_and_extra/AL.png", 
-                    stats: [ 
-                        { name: "Com. Math", grade: "A" }, 
-                        { name: "Physics", grade: "A" }, 
-                        { name: "ICT", grade: "A" },
-                        { name: "Gen. Eng.", grade: "A" },
-                        { name: "Z-Score", grade: "2.1882" } 
-                    ] 
-                },
-                { 
-                    title: "Ordinary Level Examination (O/L)", 
-                    icon: "fa-book-reader",
-                    // REPLACE THIS URL with your O/L Certificate Image URL
-                    imageUrl: "images/academic_and_extra/OL.png", 
-                    stats: [ 
-                        { name: "Sinhala", grade: "A" }, 
-                        { name: "Math", grade: "A" }, 
-                        { name: "Science", grade: "A" }, 
-                        { name: "History", grade: "A" },
-                        { name: "English", grade: "A" },
-                        { name: "Catholicism", grade: "A" },
-                        { name: "Art", grade: "A" }, 
-                        { name: "Tamil", grade: "B" }, 
-                        { name: "ICT", grade: "A" } 
-                    ] 
-                },
-                { 
-                    title: "Grade 5 Scholarship Exam", 
-                    icon: "fa-trophy",
-                    // NOTE: Image not displayed for scholarship, but keeping the URL as a fallback 
-                    imageUrl: "https://placehold.co/800x600/FFC300/1A1A1A?text=Scholarship+Score+Card", 
-                    stats: [ 
-                        { name: "Score", grade: "179/200" } 
-                    ] 
-                }
-            ],
+    <div class="card card-hover lang-card reveal">
+      <h3 style="font-size:1.3rem;">Tamil</h3>
+      
+    </div>
+
+      <div class="card card-hover lang-card reveal" style="grid-column: 1 / -1;">
+        <div style="display:flex; flex-wrap:wrap; gap:24px;">
+          <div style="min-width:160px;">
+            <h3 style="font-size:1.4rem;">English</h3>
             
-            // Education History Data 
-            educationHistory: [
-                { institution: "University of Moratuwa", type: "University", startYear: "2025", endYear: "", status: "Studying", details: "Studies in Business Science.", icon: "fa-graduation-cap" },
-                { institution: "Sirimavo Bandaranaike Vidyalaya, Colombo", type: "School", startYear: 2016, endYear: 2023, status: "Finished", details: "", icon: "fa-school" },
-                { institution: "Seventh-Day Adventist High School, Kandana", type: "School", startYear: 2011, endYear: 2016, status: "Finished", details: "", icon: "fa-tools" },
-              //{ institution: "Online Python Course", type: "Certification", startYear: 2023, endYear: 2023, status: "Finished", details: "Advanced certification in Data Structures and Algorithm implementation.", icon: "fa-laptop-code" },
-              //{ institution: "Future Tech High School", type: "School", startYear: 2005, endYear: 2009, status: "Finished", details: "Primary level education completed.", icon: "fa-chalkboard-teacher" }
-            ],
+          </div>
+          <div class="cert-grid" style="flex:1;">
+        <div class="cert-thumb" data-lightbox-url="images/academic_and_extra/ptea.png">
+          <img src="images/academic_and_extra/ptea.png" alt="English certificate" onerror="this.parentElement.style.display='none';">
+        </div>
+        <div class="cert-thumb" data-lightbox-url="images/academic_and_extra/eng_cer_1.jpg">
+          <img src="images/academic_and_extra/eng_cer_1.jpg" alt="English certificate" onerror="this.parentElement.style.display='none';">
+        </div>
+        <div class="cert-thumb" data-lightbox-url="images/academic_and_extra/eng_cer_2.jpg">
+          <img src="images/academic_and_extra/eng_cer_2.jpg" alt="English certificate" onerror="this.parentElement.style.display='none';">
+        </div>
+        <div class="cert-thumb" data-lightbox-url="images/academic_and_extra/eng_cer_3.jpg">
+          <img src="images/academic_and_extra/eng_cer_3.jpg" alt="English certificate" onerror="this.parentElement.style.display='none';">
+        </div></div>
+        </div>
+      </div></div>
+  </div>
+</div>
 
-            // Language Data
-            languages: [
-                { name: "Sinhala", proficiency: "Native Speaker", certificateStatus: "" },
-                { name: "Tamil", proficiency: "", certificateStatus: "" },
-                { 
-                    name: "English", 
-                    proficiency: "", 
-                    certificateStatus: "",
-                    certificates: [
-                        { name: "", url: "images/academic_and_extra/ptea.png" },
-                        { name: "", url: "images/academic_and_extra/eng_cer_1.jpg" },
-                        { name: "", url: "images/academic_and_extra/eng_cer_2.jpg" },
-                        { name: "", url: "images/academic_and_extra/eng_cer_3.jpg" }
-                    ]
-                }
-            ]
-        };
-
-        // Extracurricular/Sports Data - UPDATED FOR DYNAMIC SPANNING AND MULTIPLE IMAGES
-        const extracurricularData = [
-            {
-                // 1. ART EXHIBITIONS: SPAN 3, 4 IMAGES (full row)
-                title: "Art Exhibitions & Competitions",
-                type: "creative",
-                icon: "fa-brush text-sports-red",
-                span: 3, // Full row on large screens
-                images: [ 
-                    { name: "2020", url: "images/academic_and_extra/art_cer_3.jpg" }, 
-                    { name: "2018", url: "images/academic_and_extra/art_cer_4.jpg" }, 
-                    { name: "2023", url: "images/academic_and_extra/art_cer_2.jpg" }, 
-                    { name: "2021", url: "images/academic_and_extra/art_cer_1.jpg" } 
-                ],
-                stats: [
-                    { name: "Click to View", grade: `<a href="aesthetic.html" class="text-sports-red underline hover:text-red-400 transition">Art Gallery</a>` }
-                ],
-                participation_focus: "Active participation and multiple achievements in school art exhibitions and competitions over the years."
-            },
-            {
-                // 2. SWIMMING: SPAN 1, 1 IMAGE (one column)
-                title: "Swimming",
-                type: "sports",
-                icon: "fa-water",
-                span: 1, // Single column on large screens
-                images: [
-                    { name: "Swimming", url: "images/academic_and_extra/swim.png" }
-                ],
-                stats: [
-                    { name: "Duration", grade: "2+ Yrs" },
-                  //{ name: "Focus", grade: "Fitness" } 
-                ],
-                participation_focus: "Consistent engagement in swimming activities over two years."
-            },
-            {
-                // 3. ANNUAL SPORTS: SPAN 2, 2 IMAGES (two columns)
-                title: "University and School Sports Events",
-                type: "sports",
-                icon: "fa-running",
-                span: 2, // one columns on large screens
-                images: [
-                    { name: "2026", url: "images/academic_and_extra/uni_sports_cer_1.jpg" },
-                    { name: "2026", url: "images/academic_and_extra/uni_sports_cer_2.jpg" },
-                    { name: "2019", url: "images/academic_and_extra/sport_cer_1.jpg" },
-                    { name: "2016", url: "images/academic_and_extra/sport_cer_2.jpg" }
-                ],
-                stats: [
-                   //{ name: "Schedule", grade: "Annual" },
-                   //{ name: "Role", grade: "House Rep." }
-                ],
-                participation_focus: "Active involvement in university and school sport events."
-            }
-        ];
-
-        // Helper function to generate the standard small stat box (two lines)
-        const standardStatBox = (stat) => `
-            <div class="stat-subject-box text-center p-2 rounded-lg bg-main-bg/50 border border-white/10">
-                <p class="text-xs text-secondary-text uppercase truncate">${stat.name}</p>
-                <p class="text-xl font-black ${stat.name === 'Z-Score' ? 'text-accent-yellow' : 'text-light-text'}">${stat.grade}</p>
-            </div>
-        `;
-
-
-        // --- RENDERING FUNCTIONS (ACADEMIC - REMAINS UNCHANGED) ---
+<div class="section-tight" style="background:var(--surface-2); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container" data-reveal>
+    <h2 class="section-heading" style="font-size:1.6rem; text-align:center;">Extracurricular Activities</h2>
+    <p class="section-sub" style="margin:0 auto 30px; text-align:center;">Consistent participation in university and school events and activities.</p>
+    <div class="extra-grid">
+    <div class="card card-hover extra-card span-3 reveal" style="padding:0;">
+      <div class="extra-images count-4"><img src="images/academic_and_extra/art_cer_3.jpg" alt="2020" data-lightbox-url="images/academic_and_extra/art_cer_3.jpg"><img src="images/academic_and_extra/art_cer_4.jpg" alt="2018" data-lightbox-url="images/academic_and_extra/art_cer_4.jpg"><img src="images/academic_and_extra/art_cer_2.jpg" alt="2023" data-lightbox-url="images/academic_and_extra/art_cer_2.jpg"><img src="images/academic_and_extra/art_cer_1.jpg" alt="2021" data-lightbox-url="images/academic_and_extra/art_cer_1.jpg"></div>
+      <div style="padding:22px;">
+        <h3 style="font-size:1.15rem; display:flex; align-items:center; gap:10px; margin-bottom:8px;"><i class="fas fa-brush" style="color:var(--accent);"></i> Art Exhibitions &amp; Competitions</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Active participation and multiple achievements in school art exhibitions and competitions over the years.</p>
         
-        // Helper function to build the main content body (stats)
-        const getCardContentHtml = (item) => { 
-            let statsHtml = '';
+        <div style="margin-top:12px;"><a class="btn btn-outline btn-sm" href="aesthetic.html">Art Gallery <i class="fas fa-arrow-right"></i></a></div>
+      </div>
+    </div>
 
-            if (item.title === "Advanced Level Examination (A/L)") {
-                // A/L: All 5 stats (4 subjects + 1 Z-Score) 
-                const allStats = item.stats;
-
-                const subjectBoxes = allStats.map(standardStatBox).join('');
-                
-                // Responsive grid for 5 items
-                statsHtml = `
-                    <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3 flex-grow">
-                        ${subjectBoxes}
-                    </div>
-                `;
-                
-            } else if (item.title === "Ordinary Level Examination (O/L)") {
-                // O/L: 9 subjects in a 3x3 grid
-                const subjectBoxes = item.stats.map(stat => `
-                    <div class="stat-subject-box text-center p-1 rounded bg-main-bg/50 border border-white/10">
-                        <p class="text-xs text-secondary-text truncate">${stat.name}</p>
-                        <p class="text-lg font-black text-light-text">${stat.grade}</p>
-                    </div>
-                `).join('');
-
-                statsHtml = `
-                    <div class="mb-4">
-                        <div class="grid grid-cols-3 gap-2">
-                            ${subjectBoxes}
-                        </div>
-                    </div>
-                `;
-
-            } else if (item.title === "Grade 5 Scholarship Exam") {
-                // Scholarship: Custom single-line display
-                const scoreStat = item.stats[0]; 
-                
-                // Custom single-line display: 'Score: 179/200'
-                const singleLineScoreBox = `
-                    <div class="stat-subject-box p-3 text-center rounded-lg bg-main-bg/50 border border-white/20 w-full">
-                        <p class="text-lg md:text-xl font-bold text-secondary-text">
-                            <span class="uppercase font-semibold">${scoreStat.name}:</span>
-                            <span class="font-black text-light-text ml-2">${scoreStat.grade}</span> 
-                        </p>
-                    </div>
-                `;
-
-                statsHtml = `
-                    <div class="mt-3 flex justify-start w-full">
-                        ${singleLineScoreBox}
-                    </div>
-                `;
-            }
-
-            return statsHtml;
-        };
+    <div class="card card-hover extra-card  reveal" style="padding:0;">
+      <div class="extra-images count-1"><img src="images/academic_and_extra/swim.png" alt="Swimming" data-lightbox-url="images/academic_and_extra/swim.png"></div>
+      <div style="padding:22px;">
+        <h3 style="font-size:1.15rem; display:flex; align-items:center; gap:10px; margin-bottom:8px;"><i class="fas fa-water" style="color:var(--accent);"></i> Swimming</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Consistent engagement in swimming activities over two years.</p>
+        <div class="stats-grid" style="margin-top:8px;">
+    <div class="stat-box"><div class="k">Duration</div><div class="v">2+ Yrs</div></div>
+  </div>
         
-        /**
-         * Creates a vertically stacked academic card with an image on top (optional).
-         */
-        const createAcademicCard = (item) => {
-            const contentHtml = getCardContentHtml(item);
-            const imageUrl = item.imageUrl;
-            
-            // Determine if it's the scholarship card (NO IMAGE requested)
-            const isScholarship = item.title === "Grade 5 Scholarship Exam"; 
+      </div>
+    </div>
 
-            // Determine the border color based on the card type
-            const borderColor = isScholarship ? 'accent-yellow' : 'academic-blue';
-
-            // TOP: Image/Visual (Certificate) - Only renders if NOT scholarship
-            const imageHtml = isScholarship ? '' : `
-                <div class="w-full image-container p-4 flex items-center justify-center bg-main-bg/70 rounded-t-xl" 
-                    onclick="openModal('${imageUrl}')" style="min-height: 200px;">
-                    
-                    <!-- Clickable image wrapper (Max width constraint for aesthetic) -->
-                    <div class="relative max-w-full h-full cursor-pointer group" >
-                        <!-- Image source updated for object-contain to show the full certificate -->
-                        <img src="${imageUrl}" alt="${item.title} certificate" 
-                                 class="max-w-full max-h-[250px] object-contain rounded-lg transition duration-300 group-hover:scale-[1.02] group-hover:opacity-80" 
-                                 style="border: 3px solid #4E93FF; max-height: 250px;"
-                                 onerror="this.onerror=null; this.src='https://placehold.co/400x300/4E93FF/F0F0F0?text=Certificate+Missing';">
-                        <!-- Hover Overlay -->
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/30 rounded-lg">
-                            <i class="fas fa-search-plus text-5xl text-accent-yellow drop-shadow-lg"></i>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Adjust content top class based on whether an image is present
-            const contentTopClass = isScholarship ? 'rounded-t-xl' : 'rounded-none';
-
-            // Card structure
-            return `
-                <div class="base-card academic-glow academic-card flex flex-col h-full w-full p-0 border-t-4 border-${borderColor}">
-                    
-                    ${imageHtml}
-                    
-                    <!-- BOTTOM: Content (Title and Stats) - Full Width -->
-                    <div class="w-full p-6 flex flex-col justify-start bg-card-bg ${contentTopClass} flex-grow">
-                        <h3 class="text-2xl font-extrabold text-light-text mb-4 pb-2 border-b border-white/10 flex items-center">
-                            <i class="fas ${item.icon} mr-3 text-academic-blue"></i> ${item.title}
-                        </h3>
-                        ${contentHtml}
-                    </div>
-                </div>
-            `;
-        };
+    <div class="card card-hover extra-card span-2 reveal" style="padding:0;">
+      <div class="extra-images count-4"><img src="images/academic_and_extra/uni_sports_cer_1.jpg" alt="2026" data-lightbox-url="images/academic_and_extra/uni_sports_cer_1.jpg"><img src="images/academic_and_extra/uni_sports_cer_2.jpg" alt="2026" data-lightbox-url="images/academic_and_extra/uni_sports_cer_2.jpg"><img src="images/academic_and_extra/sport_cer_1.jpg" alt="2019" data-lightbox-url="images/academic_and_extra/sport_cer_1.jpg"><img src="images/academic_and_extra/sport_cer_2.jpg" alt="2016" data-lightbox-url="images/academic_and_extra/sport_cer_2.jpg"></div>
+      <div style="padding:22px;">
+        <h3 style="font-size:1.15rem; display:flex; align-items:center; gap:10px; margin-bottom:8px;"><i class="fas fa-running" style="color:var(--accent);"></i> University and School Sports Events</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Active involvement in university and school sport events.</p>
         
-        /**
-         * Renders the academic results in the new requested layout: 
-         * [A/L stacked with Scholarship] | [O/L]
-         */
-        function renderAcademicResults() {
-            const container = document.getElementById('academic-results-container');
-            if (!container) return;
-            container.innerHTML = '';
-
-            // 1. Separate the card data
-            const [alCardData, olCardData, scholarshipCardData] = academicPortfolio.results;
-            
-            // 2. Render cards
-            const alCardRendered = createAcademicCard(alCardData);
-            const olCardRendered = createAcademicCard(olCardData);
-            const scholarshipCardRendered = createAcademicCard(scholarshipCardData);
-
-            // 3. Combine everything into the new two-column responsive grid layout
-            container.innerHTML = `
-                <div class="space-y-6">
-                    <!-- Main Grid: Two columns (A/L Stack | O/L) side-by-side on large screens -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-                        
-                        <!-- COLUMN 1: A/L + Scholarship (Stacked vertically with 2:1 height proportion) -->
-                        <div class="flex flex-col gap-6 h-full">
-                            <!-- A/L: 2/3 proportion using flex properties -->
-                            <div style="flex: 2 1 0%; min-height: fit-content;"> 
-                                ${alCardRendered}
-                            </div>
-                            <!-- Scholarship: 1/3 proportion using flex properties -->
-                            <div style="flex: 1 1 0%; min-height: fit-content;"> 
-                                ${scholarshipCardRendered}
-                            </div>
-                        </div>
-                        
-                        <!-- COLUMN 2: O/L (Single Card) -->
-                        <div>
-                            ${olCardRendered}
-                        </div>
-                        
-                    </div>
-                </div>
-            `;
-        }
         
-        // Renders the Education History as CARDS (Text-Only)
-        function renderEducationHistory() {
-            const container = document.getElementById('education-history-container');
-            if (!container) return;
-            container.innerHTML = '';
-
-            academicPortfolio.educationHistory.forEach(item => {
-                const statusColor = item.status === "Finished" ? 'status-finished' : 'status-pending';
-                const statusIcon = item.status === "Finished" ? 'fa-check-circle' : 'fa-hourglass-half';
-                
-                const card = document.createElement('div');
-                // ADDED academic-glow class
-                card.className = 'base-card academic-glow'; // Use base-card structure
-                card.style.border = '2px solid #4E93FF'; // Add academic blue border
-                card.style.height = 'auto'; // Ensure height is flexible
-
-                // Text-only content block
-                card.innerHTML = `
-                    <div class="p-6 flex flex-col justify-between h-full bg-card-bg">
-                        <!-- Header Row with Type Tag -->
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="text-xl font-extrabold text-light-text leading-tight">${item.institution}</h3>
-                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-academic-blue/30 text-academic-blue flex-shrink-0 ml-3">
-                                ${item.type}
-                            </span>
-                        </div>
-
-                        <!-- Details -->
-                        <p class="text-sm text-secondary-text mb-4 flex-grow">${item.details}</p>
-                        
-                        <!-- Buttons/Badges Row (Footer) -->
-                        <div class="flex flex-wrap gap-2 pt-3 border-t border-white/10 mt-auto">
-                            <!-- Time Badge -->
-                            <span class="px-3 py-1 text-xs font-medium rounded-full bg-accent-yellow/20 text-accent-yellow flex items-center">
-                                <i class="fas fa-clock mr-2"></i> ${item.startYear} - ${item.endYear}
-                            </span>
-                            <!-- Status Badge -->
-                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-${statusColor}/20 text-${statusColor} flex items-center">
-                                <i class="fas ${statusIcon} mr-2"></i> ${item.status}
-                            </span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-        
-        // Renders the new Languages section
-        function renderLanguages() {
-            const container = document.getElementById('languages-container');
-            if (!container) return;
-            container.innerHTML = '';
-
-            academicPortfolio.languages.forEach(item => {
-                let cardHtml = '';
-                // Default class for all language cards. ADDED academic-glow
-                let cardClasses = 'p-4 rounded-lg bg-card-bg border border-academic-blue/50 academic-glow';
-
-                // Logic for the English card to include 3 responsive image placeholders and span 2 columns on desktop
-                if (item.name === 'English' && item.certificates) {
-                    // Force the English card to span both columns on medium screens and up
-                    cardClasses += ' md:col-span-2 p-0'; // Remove main padding, use internal padding
-
-                    // Dynamically generate the certificate links, making them clickable for the modal
-                    const certificateLinks = item.certificates.map(cert => `
-                        <div class="cert-link-box relative flex-1 h-32 md:h-48 bg-main-bg/50 rounded-md flex items-center justify-center p-2 border border-academic-blue/50 shadow-md cursor-pointer group" 
-                            onclick="openModal('${cert.url}')">
-                            
-                            <!-- Image URL: cert.url is kept as-is. object-contain for full fit. -->
-                            <img src="${cert.url}" alt="${cert.name} Certificate Placeholder" class="w-full h-full object-contain rounded-md transition duration-300 group-hover:opacity-80"
-                                onerror="this.onerror=null; this.src='https://placehold.co/400x550/4E93FF/F0F0F0?text=${cert.name}+Cert+Missing';">
-                            
-                            <!-- Hover Overlay -->
-                            <div class="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/50 rounded-md">
-                                <i class="fas fa-search-plus text-3xl text-accent-yellow mb-2"></i>
-                                <span class="text-xs font-bold text-light-text">${cert.name}</span>
-                            </div>
-                        </div>
-                    `).join('');
-                    
-                    // Restructured content for 1/4 (Info) and 3/4 (Certificates) split
-                    cardHtml = `
-                        <div class="${cardClasses} h-full">
-                            <!-- Desktop: Flex Row (1/4 vs 3/4), Mobile: Stacked Flex Column -->
-                            <div class="flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-white/10 h-full">
-                                <!-- Info Column (25% on desktop, full width on mobile) -->
-                                <div class="p-6 lg:w-1/4 flex flex-col justify-center">
-                                    <h3 class="text-3xl font-black text-light-text leading-tight mb-2">${item.name}</h3>
-                                    <p class="text-academic-blue font-bold text-sm mb-4">${item.proficiency}</p>
-                                    <p class="text-xs text-secondary-text">${item.certificateStatus}</p>
-                                </div>
-
-                                <!-- Certificates Column (75% on desktop, full width on mobile) -->
-                                <div class="p-4 lg:w-3/4 flex-grow grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                    ${certificateLinks}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-
-                } else {
-                    // Standard card for Sinhala/Tamil
-                    cardHtml = `
-                        <div class="${cardClasses} flex items-center justify-between">
-                            <div class="flex flex-col">
-                                <h3 class="text-2xl font-black text-light-text">${item.name}</h3>
-                                <p class="text-secondary-text text-sm">${item.proficiency}</p>
-                    `;
-                }
-
-                container.innerHTML += cardHtml;
-            });
-        }
-
-
-        // --- RENDERING FUNCTIONS (EXTRACURRICULARS - UPDATED) ---
-
-        /**
-         * Generates the HTML for the certificate/image section of the extracurricular card.
-         */
-        const createExtracurricularImageSection = (images) => {
-            // Determine the responsive grid layout based on the number of images
-            let imageGridClasses = 'grid grid-cols-2 gap-3 p-4';
-            if (images.length <= 1) {
-                 // For 1 image, center it
-                imageGridClasses = 'flex items-center justify-center p-4';
-            } else if (images.length === 2) {
-                // For 2 images, 1x2 grid on mobile, 2 columns on desktop
-                imageGridClasses = 'grid grid-cols-2 gap-3 p-4';
-            } else if (images.length === 4) {
-                 // For 4 images, 2x2 grid
-                imageGridClasses = 'grid grid-cols-4 gap-3 p-4';
-            }
-            // For Art (span 3), the 2x2 grid should be inside the card body
-
-            const imageHtml = images.map(image => `
-                <div class="relative w-full h-auto cursor-pointer group rounded-lg overflow-hidden border border-sports-red/30 hover:border-sports-red transition duration-300 cert-link-box" 
-                     onclick="openModal('${image.url}')">
-                     
-                    <!-- Image (Set to max height/width for vertical certs) -->
-                    <img src="${image.url}" alt="${image.name}" 
-                         class="w-full h-full object-contain max-h-64 sm:max-h-72 rounded-md transition duration-300 group-hover:scale-[1.05] group-hover:opacity-80" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/400x550/E94F64/F0F0F0?text=${image.name.replace(/\s/g, '+')}+Missing';">
-                    
-                    <!-- Hover Overlay -->
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/50">
-                        <i class="fas fa-search-plus text-3xl text-accent-yellow drop-shadow-lg"></i>
-                    </div>
-                    
-                    <!-- Label (Visible by default) -->
-                    <div class="absolute bottom-0 left-0 right-0 bg-black/70 text-center text-xs text-secondary-text py-1 truncate">
-                         ${image.name}
-                    </div>
-                </div>
-            `).join('');
-
-            return `
-                <div class="w-full bg-main-bg/70 ${imageGridClasses} rounded-t-xl">
-                    ${imageHtml}
-                </div>
-            `;
-        };
-
-
-        /**
-         * Creates a complete Extracurricular card with dynamic image section and stats.
-         * Stats row will use auto-fit grid to expand based on number of stats.
-         */
-        const createExtracurricularCard = (item) => {
-            const spanClass = item.span ? `lg:col-span-${item.span}` : 'lg:col-span-1'; 
-            const iconColor = item.type === 'sports' ? 'text-sports-red' : 'text-accent-yellow';
-
-            const imageSectionHtml = createExtracurricularImageSection(item.images);
-
-            // Stats section: auto-fit grid for dynamic length
-            const statsHtml = item.stats.map(standardStatBox).join('');
-
-            return `
-            <div class="base-card extracurricular-glow ${spanClass} border-t-4 border-sports-red">
-                ${imageSectionHtml}
-                <div class="w-full p-6 flex flex-col justify-start flex-grow">
-                <h3 class="text-2xl font-extrabold text-light-text mb-4 pb-2 border-b border-white/10 flex items-center">
-                    <i class="fas ${item.icon} mr-3 ${iconColor}"></i> ${item.title}
-                </h3>
-                <!-- Stats Row: auto-fit grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-4"
-                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
-                    ${statsHtml}
-                </div>
-                <p class="text-sm text-secondary-text flex-grow mt-auto">
-                    ${item.participation_focus}
-                </p>
-                </div>
-            </div>
-            `;
-        };
-
-        /**
-         * Renders the extracurricular section using the custom layouts and spanning.
-         */
-        function renderExtracurriculars() {
-            const container = document.getElementById('extracurricular-container');
-            if (!container) return;
-            container.innerHTML = '';
-            container.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto'; 
-
-            extracurricularData.forEach(item => {
-            const cardHtml = createExtracurricularCard(item);
-            container.innerHTML += cardHtml;
-            });
-        }
-        
-        // --- INITIALIZATION ---
-        
-        function initPortfolio() {
-            renderEducationHistory();
-            renderAcademicResults();
-            renderLanguages();
-            renderExtracurriculars(); 
-        }
-
-    </script>
+      </div>
+    </div></div>
+  </div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Amaya Devindi. Built with care.</span>
+    <span class="footer-social">
+      <a href="https://github.com/AmayaDevindi" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+      
+    </span>
+  </div>
+</footer>
+<script src="assets/js/site.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function(){ SiteGallery.bind('main'); });</script>
 </body>
 </html>

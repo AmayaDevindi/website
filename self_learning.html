@@ -1,596 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Self Learning</title>
-    <link rel="icon" type="image/svg+xml" href="images/self_learned/icon.svg">
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Load Inter font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght300;500;700;900&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { 
-                        'accent-teal': '#4cd8c2',      /* Bright Accent */
-                        'dark-teal': '#0f1c1a',        /* Main Background */
-                        'mid-teal': '#1a3632',         /* Card Background */
-                        'light-text': '#e0f2f1',       /* Light Text */
-                        'status-learned': '#10b981',   /* Emerald for Learned */
-                        'status-learning': '#f59e0b',  /* Amber for Learning */
-                        'b3d9d3': '#b3d9d3',           // Light gray-teal for secondary text
-                    },
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                }
-            }
-        }
-    </script>
-    <style>
-        /* BASE STYLES */
-        body { 
-            background-color: #0f1c1a; 
-            color: #e0f2f1; 
-            font-family: 'Inter', sans-serif; 
-        }
-        
-        h1, h2, h3, h4 { color: #e0f2f1; }
-        
-        section {
-            padding: 4rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* --- 1. HERO SECTION STYLES (Existing) --- */
-        .hero-section {
-            position: relative;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            text-align: center;
-            padding: 2rem;
-            background-color: #0f1c1a;
-        }
-
-        .hero-content {
-            z-index: 10;
-            max-width: 800px;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-        @media (min-width: 768px) {
-             .hero-content h1 { font-size: 4.5rem; }
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            color: #b3d9d3;
-            margin-bottom: 2.5rem;
-        }
-
-        .quick-links .button {
-            display: inline-block;
-            padding: 0.9rem 2.5rem; 
-            border-radius: 9999px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            background-color: #4cd8c2;
-            color: #0f1c1a;
-            box-shadow: 0 4px 15px rgba(76, 216, 194, 0.5);
-        }
-        .quick-links .button:hover {
-            background-color: #38c2ac;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(76, 216, 194, 0.6);
-        }
-
-        /* Divider */
-        .section-divider {
-            border: none;
-            height: 1px;
-            background-color: rgba(76, 216, 194, 0.3);
-            width: 50%;
-            margin: 0 auto;
-        }
-        
-        /* --- 2. CERTIFICATES SECTION STYLES (Existing) --- */
-        .certificates-section h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2.5rem;
-            text-align: center;
-        }
-        .certificate-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        .certificate-card {
-            background-color: #1a3632;
-            border-radius: 12px; 
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); 
-            height: 100%; 
-            overflow: hidden; 
-            display: flex;
-            flex-direction: column;
-        }
-        .certificate-card:hover {
-            background-color: #244b44;
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 30px rgba(76, 216, 194, 0.25); 
-        }
-        
-        .certificate-image {
-            width: 100%;
-            height: 180px; 
-            object-fit: cover;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .certificate-card:hover .certificate-image {
-            transform: scale(1.05); 
-        }
-        
-        /* --- 3. TOOLS OVERVIEW STYLES (Existing) --- */
-        .tools-overview-section {
-            padding: 2rem 1rem;
-            max-width: 100%; 
-        }
-        .tools-fade-wrapper {
-            position: relative;
-        }
-        .tools-fade-wrapper::before,
-        .tools-fade-wrapper::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 50px; 
-            z-index: 20;
-            pointer-events: none; 
-        }
-        .tools-fade-wrapper::before {
-            left: 0;
-            background: linear-gradient(to right, #0f1c1a 0%, transparent 100%);
-        }
-        .tools-fade-wrapper::after {
-            right: 0;
-            background: linear-gradient(to left, #0f1c1a 0%, transparent 100%);
-        }
-        .tools-scroll-container {
-            display: flex;
-            overflow-x: auto; 
-            gap: 1.5rem;
-            padding: 1rem 0; 
-            will-change: transform; 
-            transition: transform 0.5s ease;
-            scrollbar-width: none; 
-        }
-        .tools-scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-        .tools-scroll-container:hover {
-            transform: translateX(-10px); 
-        }
-        .tool-card {
-            flex: 0 0 auto; 
-            width: 120px; 
-            height: 120px; 
-            background-color: #1a3632;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0.5rem;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s, background-color 0.2s, border 0.2s;
-            border: 1px solid transparent;
-        }
-        .tool-card:hover {
-            transform: scale(1.05);
-            background-color: #244b44;
-            border-color: #4cd8c2;
-        }
-        .tool-icon {
-            font-size: 2.5rem;
-            color: #4cd8c2;
-            margin-bottom: 0.5rem;
-        }
-        .tool-name {
-            font-size: 0.8rem;
-            font-weight: 500;
-            line-height: 1.1;
-        }
-
-        /* --- 4. LEARNING JOURNEY STYLES (MODIFIED FOR MASONRY/PINTEREST GRID) --- */
-        .learning-section h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .learning-grid {
-            /* Masonry-style layout using CSS Columns */
-            column-count: 1; /* Default for mobile */
-            column-gap: 1.5rem; 
-        }
-        /* Tablet/Small Desktop: 2 columns */
-        @media (min-width: 640px) {
-            .learning-grid { column-count: 2; }
-        }
-        /* Large Desktop: 3 columns */
-        @media (min-width: 1024px) {
-            .learning-grid { column-count: 3; }
-        }
-
-        .learning-card {
-            background-color: #1a3632;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s, border-color 0.3s;
-            border: 2px solid transparent;
-            
-            /* Essential for Masonry effect */
-            display: inline-block; /* Treat as inline block for column flow */
-            width: 100%; /* Must take full column width */
-            margin-bottom: 1.5rem; /* Space between cards */
-            break-inside: avoid; /* PREVENTS card content from splitting across columns */
-        }
-        
-        .learning-card:hover {
-            transform: translateY(-5px);
-            border-color: #4cd8c2;
-            box-shadow: 0 12px 25px rgba(76, 216, 194, 0.2);
-        }
-
-        .learning-card h3 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #4cd8c2;
-            margin-bottom: 0.5rem;
-        }
-
-        .resource-list {
-            margin-top: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem; /* Space between resource buttons */
-        }
-        
-        .resource-list-title {
-            font-weight: 600;
-            color: #b3d9d3;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-        }
-
-        /* Resource Button Style (New/Modified) */
-        .resource-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 0.6rem 1rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 6px;
-            background-color: #244b44; /* Darker background for distinction */
-            color: #4cd8c2;
-            border: 1px solid #38c2ac40;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            text-align: center;
-        }
-        .resource-button:hover {
-            background-color: #38c2ac;
-            color: #0f1c1a;
-            border-color: #4cd8c2;
-            transform: translateY(-1px);
-        }
-        
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Self Learning — Amaya Devindi</title>
+<meta name="description" content="Certificates, tools, and ongoing learning tracks." />
+<link rel="icon" type="image/svg+xml" href="images/self_learned/icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/site.css" />
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<!-- This file is generated by scripts/build.mjs — edit the templates/content files instead. -->
 </head>
-<body>
-    <!-- Fixed Home Button with transparent styling -->
-    <div class="fixed top-4 left-4 z-50">
-        <a href="about_me.html" class="px-6 py-3 rounded-full font-bold 
-            bg-transparent text-accent-teal border border-accent-teal 
-            hover:bg-accent-teal hover:text-dark-teal 
-            transition duration-300 shadow-lg">
-            ← Home
-        </a>
+<body data-section="self-learning">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-nav">
+  <div class="container">
+    <a class="brand" href="about_me.html">
+      <span class="brand-mark">AD</span>
+      <span>Amaya Devindi</span>
+    </a>
+    <nav class="nav-links" data-nav-links>
+      <a class="nav-link" href="about_me.html">Home</a>
+      <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link" href="academic_and_extracurricular.html">Academic &amp; Extracurricular</a>
+        <a class="nav-link is-active" href="self_learning.html">Self Learning</a>
+        <a class="nav-link" href="hobbies.html">Hobbies</a>
+        <a class="nav-link" href="aesthetic.html">Aesthetic</a>
+        <a class="nav-link" href="community_resourses/community_resourses.html">Community Resources</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode" type="button">
+        <i class="fas fa-sun icon-sun"></i>
+        <i class="fas fa-moon icon-moon"></i>
+      </button>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" type="button"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+<div class="page-header container" data-section="self-learning">
+  <div class="eyebrow"><i class="fas fa-book-open"></i> Self Learning</div>
+  <h1>Pursuing Knowledge to Create Meaningful Impact</h1>
+  <p>Passionate about <b>Computer Science</b>, <b>AI</b>, and <b>Data Science</b> — using technology and innovation to create positive change in society.</p>
+  <div style="margin-top:22px;"><a class="btn btn-primary" href="projects.html">Explore Projects <i class="fas fa-arrow-right"></i></a></div>
+</div>
+
+<div class="container section-tight" data-reveal>
+  <h2 class="section-heading" style="font-size:1.6rem; text-align:center;">Certificates Gained</h2>
+  <div class="section-grid" style="grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); margin-top:30px;">
+    
+    <div class="card card-hover certificate-card reveal">
+      <img src="images/self_learned/CS50P.png" alt="CS50P: Introduction to Programming with Python" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Certificate';">
+      <div class="body">
+        <h4 style="font-size:1.05rem;">CS50P: Introduction to Programming with Python</h4>
+        <p style="color:var(--text-muted); font-size:0.85rem;">Provider: <b style="color:var(--accent);">Harvard University</b></p>
+        <a href="https://certificates.cs50.io/0d73d411-3f59-4a47-8300-fc13121a4cc3.pdf?size=letter" target="_blank" rel="noopener" class="resource-link" style="margin-top:auto;"><i class="fas fa-external-link-alt"></i> View &amp; Verify Certificate</a>
+      </div>
     </div>
 
-    <main>
-        <section id="home" class="hero-section">
-            <div class="hero-content">
-                <h1>Pursuing Knowledge to Create Meaningful Impact.</h1>
-                <p>Passionate about <b>Computer Science</b>, <b>AI</b>, and <b>Data Science</b>.<br>With a vision to use technology and innovation to create positive change in society.</p>
-                <div class="quick-links">
-                    <!-- Link to projects.html -->
-                    <a href="projects.html" class="button">Explore Projects</a>
-                </div>
-            </div>
-            <div class="hero-banner-overlay"></div>
-        </section>
+    <div class="card card-hover certificate-card reveal">
+      <img src="images/self_learned/CS50AI.png" alt="CS50AI: Introduction to Artificial Intelligence with Python" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Certificate';">
+      <div class="body">
+        <h4 style="font-size:1.05rem;">CS50AI: Introduction to Artificial Intelligence with Python</h4>
+        <p style="color:var(--text-muted); font-size:0.85rem;">Provider: <b style="color:var(--accent);">Harvard University</b></p>
+        <a href="https://cs50.harvard.edu/certificates/58cd5db3-64a4-49f0-910c-cc9962ee6548" target="_blank" rel="noopener" class="resource-link" style="margin-top:auto;"><i class="fas fa-external-link-alt"></i> View &amp; Verify Certificate</a>
+      </div>
+    </div>
 
-        <hr class="section-divider">
+    <div class="card card-hover certificate-card reveal">
+      <img src="images/self_learned/CS50SQL.png" alt="CS50SQL: Introduction to Databases with SQL" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Certificate';">
+      <div class="body">
+        <h4 style="font-size:1.05rem;">CS50SQL: Introduction to Databases with SQL</h4>
+        <p style="color:var(--text-muted); font-size:0.85rem;">Provider: <b style="color:var(--accent);">Harvard University</b></p>
+        <a href="https://cs50.harvard.edu/certificates/afda8f77-608c-4815-ab95-22a80dc966b9" target="_blank" rel="noopener" class="resource-link" style="margin-top:auto;"><i class="fas fa-external-link-alt"></i> View &amp; Verify Certificate</a>
+      </div>
+    </div>
 
-        <!-- Certificates Gained Section -->
-        <section id="certificates" class="certificates-section">
-            <h2>Certificates Gained</h2>
-            <div id="certificate-grid-container" class="certificate-grid">
-                <!-- Certificates will be rendered here by JavaScript -->
-            </div>
-        </section>
+    <div class="card card-hover certificate-card reveal">
+      <img src="images/self_learned/CS50R.png" alt="CS50R: Introduction to Programming with R" onerror="this.onerror=null; this.src='https://placehold.co/600x400?text=Certificate';">
+      <div class="body">
+        <h4 style="font-size:1.05rem;">CS50R: Introduction to Programming with R</h4>
+        <p style="color:var(--text-muted); font-size:0.85rem;">Provider: <b style="color:var(--accent);">Harvard University</b></p>
+        <a href="https://certificates.cs50.io/763c4446-79d5-4a27-9b24-e9594fe6cd66.pdf?size=letter" target="_blank" rel="noopener" class="resource-link" style="margin-top:auto;"><i class="fas fa-external-link-alt"></i> View &amp; Verify Certificate</a>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <hr class="section-divider">
-        
-        <!-- Tools and Technologies Overview (Horizontal Scroll) -->
-        <section id="tools-overview" class="tools-overview-section">
-            <h2 class="text-2xl font-bold text-center mb-6">Core Toolkit & Technologies</h2>
-            <div class="tools-fade-wrapper">
-                <div id="tools-scroll-container" class="tools-scroll-container">
-                    <!-- Tool cards injected here by JavaScript -->
-                </div>
-            </div>
-        </section>
+<div class="container section-tight">
+  <h2 class="section-heading" style="font-size:1.4rem; text-align:center; margin-bottom:20px;">Core Toolkit &amp; Technologies</h2>
+  <div class="tool-strip"><div class="tool-chip"><i class="fab fa-python"></i><span>Python</span></div>
+<div class="tool-chip"><i class="fab fa-r-project"></i><span>R</span></div>
+<div class="tool-chip"><i class="fas fa-brain"></i><span>TensorFlow</span></div>
+<div class="tool-chip"><i class="fas fa-microchip"></i><span>Keras</span></div>
+<div class="tool-chip"><i class="fas fa-table"></i><span>Pandas/NumPy</span></div>
+<div class="tool-chip"><i class="fas fa-chart-area"></i><span>Matplotlib</span></div>
+<div class="tool-chip"><i class="fas fa-microchip"></i><span>Arduino</span></div>
+<div class="tool-chip"><i class="fab fa-html5"></i><span>HTML5</span></div>
+<div class="tool-chip"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+<div class="tool-chip"><i class="fab fa-php"></i><span>PHP</span></div>
+<div class="tool-chip"><i class="fas fa-code"></i><span>VS Code</span></div>
+<div class="tool-chip"><i class="fab fa-git-alt"></i><span>Git</span></div>
+<div class="tool-chip"><i class="fab fa-github"></i><span>GitHub</span></div>
+<div class="tool-chip"><i class="fab fa-google"></i><span>Google Colab</span></div>
+<div class="tool-chip"><i class="fas fa-book"></i><span>Jupyter Notebook</span></div>
+<div class="tool-chip"><i class="fas fa-database"></i><span>SQL</span></div></div>
+</div>
 
-        <hr class="section-divider">
+<div class="container section-tight" data-reveal>
+  <h2 class="section-heading" style="font-size:1.6rem; text-align:center;">Learning Notes &amp; Resources</h2>
+  <p class="section-sub" style="margin:0 auto 30px; text-align:center;">An overview of my current and completed learning tracks — click through to the resources I used.</p>
+  <div class="masonry" style="column-count:1;" data-topics-grid>
+    
+    <div class="card card-hover reveal" style="padding:26px; margin-bottom:20px; break-inside:avoid; display:inline-block; width:100%;">
+      <h3 style="font-size:1.35rem; color:var(--accent); margin-bottom:10px;">Python Programming</h3>
+      <p style="color:var(--text-muted); font-size:0.92rem;">A versatile, high-level programming language used for web development, automation, data analysis, AI, and more. Python is beginner-friendly and widely adopted in both academia and industry.</p>
+      <div class="resource-list">
+        <a class="resource-link" href="https://cs50.harvard.edu/python/" target="_blank" rel="noopener"><i class="fas fa-link"></i> CS50P: Introduction to Programming with Python</a>
+<a class="resource-link" href="https://docs.python.org/3/" target="_blank" rel="noopener"><i class="fas fa-link"></i> Python Documentation</a>
+<a class="resource-link" href="https://www.w3schools.com/python/default.asp" target="_blank" rel="noopener"><i class="fas fa-link"></i> W3Schools: Python</a>
+      </div>
+    </div>
 
-        <section id="learning-journey" class="learning-section">
-            <h2>Learning Notes & Resources</h2>
-            <p class="text-center text-lg text-b3d9d3 max-w-2xl mx-auto mb-10">Below is an overview of my current and completed learning tracks. Click the links inside each section to explore the resources I used to learn and practice these topics.</p>
-            <!-- Grid container is now a CSS Column/Masonry layout -->
-            <div id="learning-grid-container" class="learning-grid">
-                <!-- Learning items will be rendered here by JavaScript -->
-            </div>
-        </section>
-        
-        <hr class="section-divider">
+    <div class="card card-hover reveal" style="padding:26px; margin-bottom:20px; break-inside:avoid; display:inline-block; width:100%;">
+      <h3 style="font-size:1.35rem; color:var(--accent); margin-bottom:10px;">Deep Learning (CNNs, RNNs)</h3>
+      <p style="color:var(--text-muted); font-size:0.92rem;">Advanced subset of machine learning focusing on neural networks. Learn to build and train CNNs, RNNs, and transformers for image recognition, NLP, and AI applications using TensorFlow and Keras.</p>
+      <div class="resource-list">
+        <a class="resource-link" href="https://www.coursera.org/specializations/deep-learning" target="_blank" rel="noopener"><i class="fas fa-link"></i> Coursera: Deep Learning Specialization</a>
+<a class="resource-link" href="http://14.139.161.31/OddSem-0822-1122/Hands-On_Machine_Learning_with_Scikit-Learn-Keras-and-TensorFlow-2nd-Edition-Aurelien-Geron.pdf" target="_blank" rel="noopener"><i class="fas fa-link"></i> Book: Hands-On Machine Learning with Scikit-Learn and TensorFlow</a>
+      </div>
+    </div>
 
-    </main>
+    <div class="card card-hover reveal" style="padding:26px; margin-bottom:20px; break-inside:avoid; display:inline-block; width:100%;">
+      <h3 style="font-size:1.35rem; color:var(--accent); margin-bottom:10px;">Databases (SQL, MySQL, sqlite)</h3>
+      <p style="color:var(--text-muted); font-size:0.92rem;">Learn to store, retrieve, and manage structured data efficiently. Covers relational databases, SQL queries, database design, normalization, and basic CRUD operations for building data-driven applications.</p>
+      <div class="resource-list">
+        <a class="resource-link" href="https://cs50.harvard.edu/sql/" target="_blank" rel="noopener"><i class="fas fa-link"></i> CS50SQL: Introduction to Databases with SQL</a>
+<a class="resource-link" href="https://www.w3schools.com/sql/default.asp" target="_blank" rel="noopener"><i class="fas fa-link"></i> W3Schools: SQL</a>
+      </div>
+    </div>
 
-    <script>
-        // --- CERTIFICATE DATA (Unchanged) ---
-        const certificatesData = [
-            { 
-                name: "CS50P: Introduction to Programming with Python", 
-                provider: "Harvard University", 
-                auth_link: "https://certificates.cs50.io/0d73d411-3f59-4a47-8300-fc13121a4cc3.pdf?size=letter", 
-                image_url: "images/self_learned/CS50P.png" 
-            },
-            { 
-                name: "CS50AI: Introduction to Artificial Intelligence with Python", 
-                provider: "Harvard University", 
-                auth_link: "https://cs50.harvard.edu/certificates/58cd5db3-64a4-49f0-910c-cc9962ee6548", 
-                image_url: "images/self_learned/CS50AI.png"
-            },
-            { 
-                name: "CS50SQL: Introduction to Databases with SQL", 
-                provider: "Harvard University", 
-                auth_link: "https://cs50.harvard.edu/certificates/afda8f77-608c-4815-ab95-22a80dc966b9", 
-                image_url: "images/self_learned/CS50SQL.png" 
-            },
-            { 
-                name: "CS50R: Introduction to Programming with R", 
-                provider: "Harvard University", 
-                auth_link: "https://certificates.cs50.io/763c4446-79d5-4a27-9b24-e9594fe6cd66.pdf?size=letter", 
-                image_url: "images/self_learned/CS50R.png" 
-            },
-        ];
+    <div class="card card-hover reveal" style="padding:26px; margin-bottom:20px; break-inside:avoid; display:inline-block; width:100%;">
+      <h3 style="font-size:1.35rem; color:var(--accent); margin-bottom:10px;">Data Science &amp; Analysis</h3>
+      <p style="color:var(--text-muted); font-size:0.92rem;">Techniques for exploring, cleaning, analyzing, and visualizing data to extract meaningful insights. Tools include Pandas, NumPy, Matplotlib, Seaborn, and data wrangling best practices.</p>
+      <div class="resource-list">
+        <a class="resource-link" href="https://github.com/jakevdp/PythonDataScienceHandbook" target="_blank" rel="noopener"><i class="fas fa-link"></i> Book: Python Data Science Handbook</a>
+      </div>
+    </div>
 
-        // --- LEARNING JOURNEY DATA (MODIFIED with Resources array) ---
-        const learningItems = [
-            { 
-                title: "Python Programming", 
-                status: "", 
-                description: "A versatile, high-level programming language used for web development, automation, data analysis, AI, and more. Python is beginner-friendly and widely adopted in both academia and industry.",
-                resources: [
-                    { name: "CS50P: Introduction to Programming with Python", link: "https://cs50.harvard.edu/python/" },
-                    { name: "Python Documentation", link: "https://docs.python.org/3/" },
-                    { name: "W3Schools: Python", link: "https://www.w3schools.com/python/default.asp" }
-                ]
-            },
-            { 
-                title: "Deep Learning (CNNs, RNNs)", 
-                status: "", 
-                description: "Advanced subset of machine learning focusing on neural networks. Learn to build and train CNNs, RNNs, and transformers for image recognition, NLP, and AI applications using TensorFlow and Keras.",
-                resources: [
-                    { name: "Coursera: Deep Learning Specialization", link: "https://www.coursera.org/specializations/deep-learning" },
-                    { name: "Book: Hands-On Machine Learning with Scikit-Learn and TensorFlow", link: "http://14.139.161.31/OddSem-0822-1122/Hands-On_Machine_Learning_with_Scikit-Learn-Keras-and-TensorFlow-2nd-Edition-Aurelien-Geron.pdf" },
-                    
-                ]
-            },
-            { 
-                title: "Databases (SQL, MySQL, sqlite)", 
-                status: "", 
-                description: "Learn to store, retrieve, and manage structured data efficiently. Covers relational databases, SQL queries, database design, normalization, and basic CRUD operations for building data-driven applications.",
-                resources: [
-                    { name: "CS50SQL: Introduction to Databases with SQL", link: "https://cs50.harvard.edu/sql/" },
-                    { name: "W3Schools: SQL", link: "https://www.w3schools.com/sql/default.asp" }
-                ]
-            },
-            { 
-                title: "Data Science & Analysis", 
-                status: "", 
-                description: "Techniques for exploring, cleaning, analyzing, and visualizing data to extract meaningful insights. Tools include Pandas, NumPy, Matplotlib, Seaborn, and data wrangling best practices.",
-                resources: [
-                    { name: "Book: Python Data Science Handbook", link: "https://github.com/jakevdp/PythonDataScienceHandbook" },
-                ]
-            },
-            { 
-                title: "Machine Learning", 
-                status: "", 
-                description: "Introduction to algorithms that allow computers to learn from data and make predictions. Covers supervised, unsupervised, and reinforcement learning using libraries like scikit-learn and TensorFlow.",
-                resources: [
-                    { name: "Book: Python Data Science Handbook", link: "https://github.com/jakevdp/PythonDataScienceHandbook" },
-                    { name: "Book: Hands-On Machine Learning with Scikit-Learn and TensorFlow", link: "http://14.139.161.31/OddSem-0822-1122/Hands-On_Machine_Learning_with_Scikit-Learn-Keras-and-TensorFlow-2nd-Edition-Aurelien-Geron.pdf" },
-                ]
-            },
-            { 
-                title: "Web Development (HTML, CSS, PHP)", 
-                status: "", 
-                description: "Build modern, responsive websites and web applications. Learn HTML for structure, CSS for styling, and PHP for server-side programming. Covers full-stack fundamentals and database integration.",
-                resources: [
-                    { name: "W3Schools: HTML/CSS/PHP", link: "https://www.w3schools.com/" },
-                ]
-            },
-            { 
-                title: "R Programming", 
-                status: "", 
-                description: "A language built for data analysis, visualization, and statistical computing. Ideal for exploring datasets, performing statistical tests, and creating professional data visuals.",
-                resources: [
-                    { name: "CS50P: Introduction to Programming with R", link: "https://cs50.harvard.edu/r/" },
-                ]
-            },
-            { 
-                title: "Statistics", 
-                status: "", 
-                description: "The foundation of all data-driven decision making. Learn concepts like probability, distributions, hypothesis testing, and regression to understand and interpret data effectively.",
-                resources: [
-                    { name: "Book: Practical Statistics for Data Scientists", link: "https://datapot.vn/wp-content/uploads/2023/12/datapot.vn-Practical-Statistics-for-Data-Scientists.pdf?srsltid=AfmBOoo54Yka0_zGmymuuGxF-Z4ON0uHvix1Nbt7ZPgoPXglEnQ6vm5f" },
-                ]
-            },
-        ];
+    <div class="card card-hover reveal" style="padding:26px; margin-bottom:20px; break-inside:avoid; display:inline-block; width:100%;">
+      <h3 style="font-size:1.35rem; color:var(--accent); margin-bottom:10px;">Machine Learning</h3>
+      <p style="color:var(--text-muted); font-size:0.92rem;">Introduction to algorithms that allow computers to learn from data and make predictions. Covers supervised, unsupervised, and reinforcement learning using libraries like scikit-learn and TensorFlow.</p>
+      <div class="resource-list">
+        <a class="resource-link" href="https://github.com/jakevdp/PythonDataScienceHandbook" target="_blank" rel="noopener"><i class="fas fa-link"></i> Book: Python Data Science Handbook</a>
+<a class="resource-link" href="http://14.139.161.31/OddSem-0822-1122/Hands-On_Machine_Learning_with_Scikit-Learn-Keras-and-TensorFlow-2nd-Edition-Aurelien-Geron.pdf" target="_blank" rel="noopener"><i class="fas fa-link"></i> Book: Hands-On Machine Learning with Scikit-Learn and TensorFlow</a>
+      </div>
+    </div>
 
-        // --- TOOLS OVERVIEW DATA (Unchanged) ---
-        const toolsAndTech = [
-            { name: "Python", icon: "fab fa-python" },
-            { name: "R", icon: "fab fa-r-project" },
-            { name: "TensorFlow", icon: "fas fa-brain" },
-            { name: "Keras", icon: "fas fa-microchip" },
-            { name: "Pandas/NumPy", icon: "fas fa-table" },
-            { name: "Matplotlib", icon: "fas fa-chart-area" },
-            { name: "Arduino", icon: "fas fa-microchip" },
-            { name: "HTML5", icon: "fab fa-html5" },
-            { name: "CSS3", icon: "fab fa-css3-alt" },
-            { name: "PHP", icon: "fab fa-php" }, 
-            { name: "VS Code", icon: "fas fa-code" },
-            { name: "Git", icon: "fab fa-git-alt" },
-            { name: "GitHub", icon: "fab fa-github" },
-            { name: "Google Colab", icon: "fab fa-google" },
-            { name: "Jupyter Notebook", icon: "fas fa-book" },
-            { name: "SQL", icon: "fas fa-database" }
-        ];
+    <div class="card card-hover reveal" style="padding:26px; margin-bottom:20px; break-inside:avoid; display:inline-block; width:100%;">
+      <h3 style="font-size:1.35rem; color:var(--accent); margin-bottom:10px;">Web Development (HTML, CSS, PHP)</h3>
+      <p style="color:var(--text-muted); font-size:0.92rem;">Build modern, responsive websites and web applications. Learn HTML for structure, CSS for styling, and PHP for server-side programming. Covers full-stack fundamentals and database integration.</p>
+      <div class="resource-list">
+        <a class="resource-link" href="https://www.w3schools.com/" target="_blank" rel="noopener"><i class="fas fa-link"></i> W3Schools: HTML/CSS/PHP</a>
+      </div>
+    </div>
 
-        // --- CERTIFICATE RENDERING LOGIC (Unchanged) ---
-        function renderCertificates() {
-            const certContainer = document.getElementById('certificate-grid-container');
-            
-            if (!certContainer) return;
+    <div class="card card-hover reveal" style="padding:26px; margin-bottom:20px; break-inside:avoid; display:inline-block; width:100%;">
+      <h3 style="font-size:1.35rem; color:var(--accent); margin-bottom:10px;">R Programming</h3>
+      <p style="color:var(--text-muted); font-size:0.92rem;">A language built for data analysis, visualization, and statistical computing. Ideal for exploring datasets, performing statistical tests, and creating professional data visuals.</p>
+      <div class="resource-list">
+        <a class="resource-link" href="https://cs50.harvard.edu/r/" target="_blank" rel="noopener"><i class="fas fa-link"></i> CS50R: Introduction to Programming with R</a>
+      </div>
+    </div>
 
-            if (certificatesData.length === 0) {
-                certContainer.innerHTML = '<p class="text-center text-lg text-b3d9d3/80">No certificates listed yet. Keep learning!</p>';
-                return;
-            }
-            
-            // Clear existing content
-            certContainer.innerHTML = ''; 
+    <div class="card card-hover reveal" style="padding:26px; margin-bottom:20px; break-inside:avoid; display:inline-block; width:100%;">
+      <h3 style="font-size:1.35rem; color:var(--accent); margin-bottom:10px;">Statistics</h3>
+      <p style="color:var(--text-muted); font-size:0.92rem;">The foundation of all data-driven decision making. Learn concepts like probability, distributions, hypothesis testing, and regression to understand and interpret data effectively.</p>
+      <div class="resource-list">
+        <a class="resource-link" href="https://datapot.vn/wp-content/uploads/2023/12/datapot.vn-Practical-Statistics-for-Data-Scientists.pdf?srsltid=AfmBOoo54Yka0_zGmymuuGxF-Z4ON0uHvix1Nbt7ZPgoPXglEnQ6vm5f" target="_blank" rel="noopener"><i class="fas fa-link"></i> Book: Practical Statistics for Data Scientists</a>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+@media (min-width:640px){ [data-topics-grid]{ column-count:2 !important; } }
+@media (min-width:1024px){ [data-topics-grid]{ column-count:3 !important; } }
+</style>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Amaya Devindi. Built with care.</span>
+    <span class="footer-social">
+      <a href="https://github.com/AmayaDevindi" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+      
+    </span>
+  </div>
+</footer>
+<script src="assets/js/site.js"></script>
 
-            certificatesData.forEach(cert => {
-                const card = document.createElement('div');
-                card.className = 'certificate-card';
-                card.innerHTML = `
-                    <!-- Certificate Image Preview -->
-                    <img src="${cert.image_url}" alt="${cert.name} Certificate" 
-                        class="certificate-image"
-                        onerror="this.onerror=null; this.src='https://placehold.co/600x400/94a3b8/0f1c1a?text=Image+Not+Found'" 
-                    />
-
-                    <div class="p-4 flex flex-col flex-grow">
-                        <!-- Name of the Program -->
-                        <h4 class="text-xl font-bold leading-tight text-light-text mb-2">${cert.name}</h4>
-                        <!-- Provider -->
-                        <p class="text-sm text-b3d9d3 mb-4 flex-grow">Provider: <span class="text-accent-teal font-medium">${cert.provider}</span></p>
-                        
-                        <!-- Link to Authentication -->
-                        <a href="${cert.auth_link}" target="_blank" class="text-sm font-semibold action-link mt-auto transition duration-300 self-start pt-3 border-t border-mid-teal w-full" title="Verify certificate authenticity">
-                            <i class="fas fa-external-link-alt"></i> View & Verify Certificate
-                        </a>
-                    </div>
-                `;
-                certContainer.appendChild(card);
-            });
-        }
-
-        // --- TOOLS OVERVIEW RENDERING LOGIC (Unchanged) ---
-        function renderToolsOverview() {
-            const toolContainer = document.getElementById('tools-scroll-container');
-            if (!toolContainer) return;
-            
-            toolContainer.innerHTML = '';
-            
-            toolsAndTech.forEach(tool => {
-                const card = document.createElement('div');
-                card.className = 'tool-card';
-                card.innerHTML = `
-                    <i class="${tool.icon} tool-icon"></i>
-                    <span class="tool-name">${tool.name}</span>
-                `;
-                toolContainer.appendChild(card);
-            });
-        }
-
-        // --- LEARNING JOURNEY RENDERING LOGIC (UPDATED for Masonry and Resources) ---
-        function renderLearningJourney() {
-            const gridContainer = document.getElementById('learning-grid-container');
-            gridContainer.innerHTML = ''; // Clear existing content
-
-            learningItems.forEach(item => {
-                
-                // Build the resource buttons HTML
-                const resourceButtonsHtml = item.resources.map(resource => `
-                    <a href="${resource.link}" target="_blank" class="resource-button" title="Go to ${resource.name}">
-                        <i class="fas fa-link mr-2"></i> ${resource.name}
-                    </a>
-                `).join('');
-
-                const card = document.createElement('div');
-                card.className = 'learning-card';
-                card.innerHTML = `
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-light-text leading-tight">${item.title}</h3>
-                        <span class="status-tag status-${item.status.toLowerCase()}">${item.status}</span>
-                    </div>
-
-                    <p class="text-b3d9d3 mb-4">${item.description}</p>
-                    
-                    <div class="resource-list">
-                        <p class="resource-list-title">Resources I Used:</p>
-                        ${resourceButtonsHtml}
-                    </div>
-                `;
-                gridContainer.appendChild(card);
-            });
-        }
-
-
-        // Initialize rendering for all sections when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            renderCertificates();
-            renderToolsOverview();
-            renderLearningJourney();
-        });
-    </script>
 </body>
 </html>

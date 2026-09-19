@@ -1,0 +1,20 @@
+{
+  "_comment": "Optional labels for images/videos in images/art/. Key = filename. Add an entry here to give a new piece a caption; anything dropped into the folder without an entry still shows up automatically with a default caption.",
+  "tiger.mp4": { "caption": "Watercolor Painting" },
+  "black_lepord.jpg": { "caption": "Reverse Drawing" },
+  "deer.mp4": { "caption": "Watercolor Painting" },
+  "lepords.mp4": { "caption": "Watercolor Painting" },
+  "mahathma_gandhi.jpg": { "caption": "Pencil Drawing" },
+  "face.jpeg": { "caption": "Pencil Drawing" },
+  "tiger.jpg": { "caption": "Watercolor Painting" },
+  "buddah.jpg": { "caption": "Reverse Drawing" },
+  "eagle.mp4": { "caption": "Watercolor Painting" },
+  "cheeta.jpg": { "caption": "Reverse Drawing" },
+  "covid.jpg": { "caption": "Watercolor Painting" },
+  "elephant.jpg": { "caption": "Reverse Drawing" },
+  "eagle.jpg": { "caption": "Watercolor Painting" },
+  "deer.jpg": { "caption": "Watercolor Painting" },
+  "face_2.jpg": { "caption": "Pencil Drawing" },
+  "object_2.jpg": { "caption": "Watercolor Painting" },
+  "objects.jpg": { "caption": "Watercolor Painting" }
+}

@@ -1,0 +1,18 @@
+[
+  { "name": "Python", "icon": "fab fa-python" },
+  { "name": "R", "icon": "fab fa-r-project" },
+  { "name": "TensorFlow", "icon": "fas fa-brain" },
+  { "name": "Keras", "icon": "fas fa-microchip" },
+  { "name": "Pandas/NumPy", "icon": "fas fa-table" },
+  { "name": "Matplotlib", "icon": "fas fa-chart-area" },
+  { "name": "Arduino", "icon": "fas fa-microchip" },
+  { "name": "HTML5", "icon": "fab fa-html5" },
+  { "name": "CSS3", "icon": "fab fa-css3-alt" },
+  { "name": "PHP", "icon": "fab fa-php" },
+  { "name": "VS Code", "icon": "fas fa-code" },
+  { "name": "Git", "icon": "fab fa-git-alt" },
+  { "name": "GitHub", "icon": "fab fa-github" },
+  { "name": "Google Colab", "icon": "fab fa-google" },
+  { "name": "Jupyter Notebook", "icon": "fas fa-book" },
+  { "name": "SQL", "icon": "fas fa-database" }
+]

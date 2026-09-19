@@ -1,0 +1,99 @@
+{
+  "hero": {
+    "heading": "Bridging academics and activities to shape a well-rounded journey.",
+    "sub": "A unified reflection of my academic dedication and active engagement in diverse extracurricular pursuits."
+  },
+  "educationHistory": [
+    { "institution": "University of Moratuwa", "type": "University", "startYear": "2025", "endYear": "", "status": "Studying", "details": "Studies in Business Science." },
+    { "institution": "Sirimavo Bandaranaike Vidyalaya, Colombo", "type": "School", "startYear": "2016", "endYear": "2023", "status": "Finished", "details": "" },
+    { "institution": "Seventh-Day Adventist High School, Kandana", "type": "School", "startYear": "2011", "endYear": "2016", "status": "Finished", "details": "" }
+  ],
+  "results": [
+    {
+      "title": "Advanced Level Examination (A/L)",
+      "image": "images/academic_and_extra/AL.png",
+      "stats": [
+        { "name": "Com. Math", "grade": "A" },
+        { "name": "Physics", "grade": "A" },
+        { "name": "ICT", "grade": "A" },
+        { "name": "Gen. Eng.", "grade": "A" },
+        { "name": "Z-Score", "grade": "2.1882" }
+      ]
+    },
+    {
+      "title": "Ordinary Level Examination (O/L)",
+      "image": "images/academic_and_extra/OL.png",
+      "stats": [
+        { "name": "Sinhala", "grade": "A" },
+        { "name": "Math", "grade": "A" },
+        { "name": "Science", "grade": "A" },
+        { "name": "History", "grade": "A" },
+        { "name": "English", "grade": "A" },
+        { "name": "Catholicism", "grade": "A" },
+        { "name": "Art", "grade": "A" },
+        { "name": "Tamil", "grade": "B" },
+        { "name": "ICT", "grade": "A" }
+      ]
+    },
+    {
+      "title": "Grade 5 Scholarship Exam",
+      "image": null,
+      "compact": true,
+      "stats": [
+        { "name": "Score", "grade": "179/200" }
+      ]
+    }
+  ],
+  "languages": [
+    { "name": "Sinhala", "proficiency": "Native Speaker", "certificates": [] },
+    { "name": "Tamil", "proficiency": "", "certificates": [] },
+    {
+      "name": "English",
+      "proficiency": "",
+      "certificates": [
+        { "name": "Certificate", "url": "images/academic_and_extra/ptea.png" },
+        { "name": "Certificate", "url": "images/academic_and_extra/eng_cer_1.jpg" },
+        { "name": "Certificate", "url": "images/academic_and_extra/eng_cer_2.jpg" },
+        { "name": "Certificate", "url": "images/academic_and_extra/eng_cer_3.jpg" }
+      ]
+    }
+  ],
+  "extracurriculars": [
+    {
+      "title": "Art Exhibitions & Competitions",
+      "icon": "fa-brush",
+      "span": 3,
+      "images": [
+        { "name": "2020", "url": "images/academic_and_extra/art_cer_3.jpg" },
+        { "name": "2018", "url": "images/academic_and_extra/art_cer_4.jpg" },
+        { "name": "2023", "url": "images/academic_and_extra/art_cer_2.jpg" },
+        { "name": "2021", "url": "images/academic_and_extra/art_cer_1.jpg" }
+      ],
+      "linkLabel": "Art Gallery",
+      "linkHref": "aesthetic.html",
+      "note": "Active participation and multiple achievements in school art exhibitions and competitions over the years."
+    },
+    {
+      "title": "Swimming",
+      "icon": "fa-water",
+      "span": 1,
+      "images": [
+        { "name": "Swimming", "url": "images/academic_and_extra/swim.png" }
+      ],
+      "stats": [ { "name": "Duration", "grade": "2+ Yrs" } ],
+      "note": "Consistent engagement in swimming activities over two years."
+    },
+    {
+      "title": "University and School Sports Events",
+      "icon": "fa-running",
+      "span": 2,
+      "images": [
+        { "name": "2026", "url": "images/academic_and_extra/uni_sports_cer_1.jpg" },
+        { "name": "2026", "url": "images/academic_and_extra/uni_sports_cer_2.jpg" },
+        { "name": "2019", "url": "images/academic_and_extra/sport_cer_1.jpg" },
+        { "name": "2016", "url": "images/academic_and_extra/sport_cer_2.jpg" }
+      ],
+      "note": "Active involvement in university and school sport events."
+    }
+  ]
+}

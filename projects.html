@@ -1,273 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
-    <link rel="icon" type="image/svg+xml" href="images/projects/icon.svg">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    // Defining the primary color as Primary Blue for consistent use in Tailwind classes
-                    colors: { 'primary-blue': '#4c7cff' }, 
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                }
-            }
-        }
-    </script>
-    <style>
-        /* CSS Variables for clean maintenance */
-        :root {
-            --primary-blue: #4c7cff;
-            --dark-bg: #0b1120;
-            --card-bg: #141A29; /* Slightly softer dark blue for premium look */
-        }
-        
-        /* Base Dark Theme for Professional Blue */
-        body { 
-            background-color: var(--dark-bg); 
-            color: #f0f4f8; 
-            font-family: 'Inter', sans-serif; 
-        }
-
-        /* Styling for the back button */
-        .back-button { 
-            z-index: 100; 
-            box-shadow: 0 6px 20px rgba(76, 124, 255, 0.3); 
-        }
-        
-        /* --- PREMIUM PROJECT CARD STYLING --- */
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            overflow: hidden;
-            /* Layered shadow for initial depth */
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6), 
-                        0 0 10px rgba(76, 124, 255, 0.1); 
-            /* Premium, smoother transition with cubic-bezier */
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
-            /* Very subtle inner border for a cleaner edge */
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-15px); /* More significant lift */
-            /* Stronger, glowing shadow for interactive focus */
-            box-shadow: 0 20px 50px rgba(76, 124, 255, 0.6), 
-                        0 0 25px rgba(76, 124, 255, 0.2); 
-        }
-
-        .project-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-            border-bottom: 1px solid rgba(76, 124, 255, 0.5); /* Sharper dividing line */
-        }
-
-        .project-card h3 {
-            color: var(--primary-blue); /* Primary Blue */
-            padding: 20px 20px 10px;
-            margin: 0;
-            text-align: left;
-            font-size: 1.5em; /* Slightly larger title for impact */
-            font-weight: 700; /* Boldness for project titles */
-        }
-
-        .project-card p {
-            color: #C0C0C0; /* Slightly brighter text for readability */
-            padding: 0 20px 25px; /* Increased bottom padding to space content from button */
-            margin: 0;
-            font-size: 0.9em;
-            flex-grow: 1; 
-            text-align: left;
-        }
-
-        /* Interactive FULL-WIDTH Button Styling */
-        .project-card .button-small {
-            /* Full-width properties */
-            align-self: stretch; /* Stretch across the width */
-            width: 100%; 
-            margin: 0; /* No margin inside the card */
-            padding: 16px 20px; /* Generous vertical padding */
-            
-            /* Button appearance */
-            background-color: var(--primary-blue); /* Solid blue background */
-            color: var(--card-bg); /* Dark text for contrast */
-            font-weight: 700;
-            text-decoration: none;
-            
-            /* Layout and transition */
-            display: flex;
-            justify-content: center; /* Center content horizontally */
-            align-items: center;
-            gap: 0.75rem;
-            transition: background-color 0.2s ease, transform 0.1s;
-            
-            /* Rounded corners only at the bottom edge */
-            border-radius: 0 0 12px 12px;
-        }
-
-        .project-card .button-small:hover {
-            background-color: #6a97ff; /* Lighter blue on hover */
-            color: white; /* Ensure text is visible */
-            transform: translateY(-1px); /* Subtle lift on hover */
-        }
-        
-        /* Removing the old animated underline (not suitable for full button) */
-        .project-card .button-small::after {
-            content: none;
-        }
-
-        /* Horizontal Rule Style */
-        .section-divider {
-            margin: 40px auto; 
-            width: 60%;
-            max-width: 800px;
-            border: none;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(76, 124, 255, 0.5), transparent);
-        }
-        /* --- END OF PREMIUM PROJECT CARD STYLING --- */
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects — Amaya Devindi</title>
+<meta name="description" content="Machine learning, web apps, and hands-on builds by Amaya Devindi." />
+<link rel="icon" type="image/svg+xml" href="images/projects/icon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="assets/css/site.css" />
+<noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+<!-- This file is generated by scripts/build.mjs — edit the templates/content files instead. -->
 </head>
-<body>
-    <!-- Back Button -->
-    <div class="fixed top-6 left-6 z-50">
-        <!-- MODIFIED: Transparent background, mild blue glow on hover, solid blue on click -->
-        <a href="about_me.html"
-           class="back-button px-6 py-3 rounded-xl font-bold border border-primary-blue text-primary-blue bg-transparent
-              hover:shadow-[0_0_12px_2px_rgba(76,124,255,0.3)] hover:bg-primary-blue hover:text-white
-              active:bg-primary-blue active:text-white transition duration-200 flex items-center space-x-2">
-            <i class="fas fa-arrow-left"></i>
-            <span>Home</span>
-        </a>
+<body data-section="projects">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-nav">
+  <div class="container">
+    <a class="brand" href="about_me.html">
+      <span class="brand-mark">AD</span>
+      <span>Amaya Devindi</span>
+    </a>
+    <nav class="nav-links" data-nav-links>
+      <a class="nav-link" href="about_me.html">Home</a>
+      <a class="nav-link is-active" href="projects.html">Projects</a>
+        <a class="nav-link" href="academic_and_extracurricular.html">Academic &amp; Extracurricular</a>
+        <a class="nav-link" href="self_learning.html">Self Learning</a>
+        <a class="nav-link" href="hobbies.html">Hobbies</a>
+        <a class="nav-link" href="aesthetic.html">Aesthetic</a>
+        <a class="nav-link" href="community_resourses/community_resourses.html">Community Resources</a>
+    </nav>
+    <div class="nav-right">
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode" type="button">
+        <i class="fas fa-sun icon-sun"></i>
+        <i class="fas fa-moon icon-moon"></i>
+      </button>
+      <button class="nav-toggle" data-nav-toggle aria-label="Toggle menu" type="button"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</header>
+<main id="main">
+
+<div class="page-header container" data-section="projects">
+  <div class="eyebrow"><i class="fas fa-diagram-project"></i> Projects</div>
+  <h1>My Projects &amp; Portfolio Work</h1>
+  <p>A selection of my best work demonstrating technical skill, attention to detail, and comprehensive problem-solving across various domains.</p>
+</div>
+<div class="container">
+  <div class="filter-bar">
+    <input class="search-input" type="search" placeholder="Search projects…" data-project-search>
+    <button class="filter-chip is-active" data-filter="all" type="button">All</button><button class="filter-chip" data-filter="computer vision" type="button">Computer Vision</button><button class="filter-chip" data-filter="python" type="button">Python</button><button class="filter-chip" data-filter="automation" type="button">Automation</button><button class="filter-chip" data-filter="databases" type="button">Databases</button><button class="filter-chip" data-filter="sql" type="button">SQL</button><button class="filter-chip" data-filter="machine learning" type="button">Machine Learning</button><button class="filter-chip" data-filter="deep learning" type="button">Deep Learning</button><button class="filter-chip" data-filter="r" type="button">R</button><button class="filter-chip" data-filter="data cleaning" type="button">Data Cleaning</button><button class="filter-chip" data-filter="package" type="button">Package</button><button class="filter-chip" data-filter="web development" type="button">Web Development</button><button class="filter-chip" data-filter="html/css" type="button">HTML/CSS</button><button class="filter-chip" data-filter="data science" type="button">Data Science</button>
+  </div>
+  <div class="projects-grid" data-project-grid>
+    
+    <div class="card card-hover project-card reveal" data-tags="computer vision|python|automation">
+      <img class="thumb" src="images/projects/P1.png" alt="Virtual Hand Gesture Controller" onerror="this.style.display='none';">
+      <div class="body">
+        <h3>Virtual Hand Gesture Controller</h3>
+        <p>A hands-free computer interaction system built with <strong>OpenCV, MediaPipe, and PyAutoGUI</strong>. Detects real-time hand gestures via webcam to control scrolling, slide navigation, and program states. Features custom gestures (thumbs up/down, left/right) for precise control, ideal for presentations or touchless navigation.</p>
+        <div class="tags"><span class="tag">Computer Vision</span><span class="tag">Python</span><span class="tag">Automation</span></div>
+        <a class="btn btn-primary btn-sm" href="https://github.com/AmayaDevindi/Virtual-Hand-Gesture-Controller" target="_blank" rel="noopener">View Details <i class="fas fa-arrow-right"></i></a>
+      </div>
     </div>
 
-    <div class="min-h-screen max-w-7xl mx-auto p-8 lg:p-12">
-        <!-- Header Section -->
-        <header class="text-center mb-16 pt-20 border-b border-primary-blue/30 pb-6 shadow-lg shadow-primary-blue/10">
-            <h1 class="text-5xl md:text-6xl font-extrabold text-primary-blue mb-4 tracking-tight">
-                My Projects & Portfolio Work
-            </h1>
-            <p class="text-xl text-gray-400 max-w-4xl mx-auto mt-4">
-                A selection of my best work demonstrating technical skill, attention to detail, and comprehensive problem-solving capabilities across various domains.
-            </p>
-        </header>
-
-        <!-- Projects Section (Now styled by the custom CSS) -->
-        <section id="projects" class="projects-section">
-            <h2 class="text-3xl font-semibold text-primary-blue mb-12 text-center">Featured Projects</h2>
-            
-            <div class="projects-grid">
-                
-                <!-- Project 1: Virtual Hand Gesture Controller -->
-                <div class="project-card">
-                    <img src="images/projects/P1.png" alt="Virtual Hand Gesture Controller">
-                    <h3>Virtual Hand Gesture Controller</h3>
-                    <p>A hands-free computer interaction system built with <b>OpenCV, MediaPipe, and PyAutoGUI</b>. 
-                        Detects real-time hand gestures via webcam to control scrolling, slide navigation, and program states. 
-                        Features custom gestures (thumbs up/down, left/right) for precise control, ideal for presentations or touchless navigation.
-                    </p>
-                    <a href="https://github.com/AmayaDevindi/Virtual-Hand-Gesture-Controller" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-                
-                <!-- Project 2: Home-Garden-Database -->
-                <div class="project-card">
-                    <img src="images/projects/P2.png" alt="Home-Garden-Database">
-                    <h3>Home Garden Management Database</h3>
-                    <p>A structured <b>SQLite database</b> for managing a home garden. Tracks plants, seeds, planting history, 
-                        sections, and germination progress. Designed to help gardeners make informed, data-driven decisions 
-                        about care schedules, growth tracking, and optimal planting conditions.
-                    </p>
-                    <a href="https://github.com/AmayaDevindi/Home-Garden-Database" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-                
-                <!-- Project 3: Tea-Leaf-Disease-Identification-Model -->
-                <div class="project-card">
-                    <img src="images/projects/P3.png" alt="Tea Leaf Disease Identification Model">
-                    <h3>Tea Leaf Disease Identification: CNN Deep Learning Trained Model</h3>
-                    <p>A <b>Deep Learning classification model</b> built with <b>MobileNetV2</b> Transfer Learning.
-                        Detects and accurately classifies 8 distinct tea leaf conditions (seven diseases and the healthy state) from image input.This project delivers a ready-to-deploy Keras asset and the complete training notebook, providing a robust, automated screening solution for tea crop health and agricultural monitoring.</p>
-                    <a href="https://github.com/AmayaDevindi/Tea-Leaf-Disease-Identification-Model" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Project 6: cleanyr -->
-                <div class="project-card">
-                    <img src="images/projects/P6.png" alt="cleanyr: R Data Cleaning Package">
-                    <h3>R Package for Data Cleaning & Inspection</h3>
-                    <p>A <b>beginner-friendly R package</b> for cleaning and inspecting datasets. Includes functions to <b>clean column names</b>, <b>check missing values</b>, and <b>detect outliers</b>, making exploratory data analysis faster and easier. Ideal for students, analysts, and data enthusiasts working with small to medium datasets.</p>
-                    <a href="https://github.com/AmayaDevindi/cleanyr" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Project 7: lankadrive -->
-                <div class="project-card">
-                    <img src="images/projects/P7.jpg" alt="LankaDrive Auto Sales Website">
-                    <h3>LankaDrive Auto Sales</h3>
-                    <p>A <b>multi-page website</b> designed for a car sales company. Features a <b>hero banner</b>, <b>vehicle listings</b>, <b>services</b>, <b>customer reviews</b>, and a <b>contact inquiry form</b>. Built with pure HTML and CSS with a clean, professional automotive aesthetic.</p>
-                    <a href="https://amayadevindi.github.io/lankadrive/" class="button-small">
-                        <span>Go to website</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Project 4: Customer Churn Prediction for a Subscription Service -->
-                <div class="project-card">
-                    <img src="images/projects/P4.png" alt="Customer Churn Prediction for a Subscription Service">
-                    <h3>Customer Churn Prediction for a Subscription Service</h3>
-                    <p>A machine learning project that predicts whether a customer will cancel their subscription based on behavioral and demographic data. It uses classification models such as Random Forest and SVM to identify key churn factors and help improve customer retention strategies.</p>
-                    <a href="projects/Customer Churn Prediction for a Subscription Service.html" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Project 5: Image Classifier -->
-                <div class="project-card">
-                    <img src="images/projects/P5.png" alt="Image Classifier">
-                    <h3>Image Classifier</h3>
-                    <p>A deep learning project that classifies images into different categories by learning visual patterns. It involves data preprocessing, scaling pixel values (dividing by 255), model training, and evaluation using techniques like CNNs or SVM for image recognition.</p>
-                    <a href="projects/Image Classifier.html" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-                
-            
-                
-            </div>
-            
-            <hr class="section-divider">
-        </section>
-        
+    <div class="card card-hover project-card reveal" data-tags="databases|sql|python">
+      <img class="thumb" src="images/projects/P2.png" alt="Home Garden Management Database" onerror="this.style.display='none';">
+      <div class="body">
+        <h3>Home Garden Management Database</h3>
+        <p>A structured <strong>SQLite database</strong> for managing a home garden. Tracks plants, seeds, planting history, sections, and germination progress. Designed to help gardeners make informed, data-driven decisions about care schedules, growth tracking, and optimal planting conditions.</p>
+        <div class="tags"><span class="tag">Databases</span><span class="tag">SQL</span><span class="tag">Python</span></div>
+        <a class="btn btn-primary btn-sm" href="https://github.com/AmayaDevindi/Home-Garden-Database" target="_blank" rel="noopener">View Details <i class="fas fa-arrow-right"></i></a>
+      </div>
     </div>
 
+    <div class="card card-hover project-card reveal" data-tags="machine learning|deep learning|python">
+      <img class="thumb" src="images/projects/P3.png" alt="Tea Leaf Disease Identification: CNN Deep Learning Trained Model" onerror="this.style.display='none';">
+      <div class="body">
+        <h3>Tea Leaf Disease Identification: CNN Deep Learning Trained Model</h3>
+        <p>A <strong>Deep Learning classification model</strong> built with <strong>MobileNetV2</strong> Transfer Learning. Detects and accurately classifies 8 distinct tea leaf conditions (seven diseases and the healthy state) from image input. This project delivers a ready-to-deploy Keras asset and the complete training notebook, providing a robust, automated screening solution for tea crop health and agricultural monitoring.</p>
+        <div class="tags"><span class="tag">Machine Learning</span><span class="tag">Deep Learning</span><span class="tag">Python</span></div>
+        <a class="btn btn-primary btn-sm" href="https://github.com/AmayaDevindi/Tea-Leaf-Disease-Identification-Model" target="_blank" rel="noopener">View Details <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="card card-hover project-card reveal" data-tags="r|data cleaning|package">
+      <img class="thumb" src="images/projects/P6.png" alt="R Package for Data Cleaning &amp; Inspection" onerror="this.style.display='none';">
+      <div class="body">
+        <h3>R Package for Data Cleaning &amp; Inspection</h3>
+        <p>A <strong>beginner-friendly R package</strong> for cleaning and inspecting datasets. Includes functions to <strong>clean column names</strong>, <strong>check missing values</strong>, and <strong>detect outliers</strong>, making exploratory data analysis faster and easier. Ideal for students, analysts, and data enthusiasts working with small to medium datasets.</p>
+        <div class="tags"><span class="tag">R</span><span class="tag">Data Cleaning</span><span class="tag">Package</span></div>
+        <a class="btn btn-primary btn-sm" href="https://github.com/AmayaDevindi/cleanyr" target="_blank" rel="noopener">View Details <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="card card-hover project-card reveal" data-tags="web development|html/css">
+      <img class="thumb" src="images/projects/P7.jpg" alt="LankaDrive Auto Sales" onerror="this.style.display='none';">
+      <div class="body">
+        <h3>LankaDrive Auto Sales</h3>
+        <p>A <strong>multi-page website</strong> designed for a car sales company. Features a <strong>hero banner</strong>, <strong>vehicle listings</strong>, <strong>services</strong>, <strong>customer reviews</strong>, and a <strong>contact inquiry form</strong>. Built with pure HTML and CSS with a clean, professional automotive aesthetic.</p>
+        <div class="tags"><span class="tag">Web Development</span><span class="tag">HTML/CSS</span></div>
+        <a class="btn btn-primary btn-sm" href="https://amayadevindi.github.io/lankadrive/" target="_blank" rel="noopener">Go to website <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="card card-hover project-card reveal" data-tags="machine learning|data science|python">
+      <img class="thumb" src="images/projects/P4.png" alt="Customer Churn Prediction for a Subscription Service" onerror="this.style.display='none';">
+      <div class="body">
+        <h3>Customer Churn Prediction for a Subscription Service</h3>
+        <p>A machine learning project that predicts whether a customer will cancel their subscription based on behavioral and demographic data. It uses classification models such as Random Forest and SVM to identify key churn factors and help improve customer retention strategies.</p>
+        <div class="tags"><span class="tag">Machine Learning</span><span class="tag">Data Science</span><span class="tag">Python</span></div>
+        <a class="btn btn-primary btn-sm" href="projects/Customer Churn Prediction for a Subscription Service.html">View Details <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="card card-hover project-card reveal" data-tags="deep learning|computer vision|python">
+      <img class="thumb" src="images/projects/P5.png" alt="Image Classifier" onerror="this.style.display='none';">
+      <div class="body">
+        <h3>Image Classifier</h3>
+        <p>A deep learning project that classifies images into different categories by learning visual patterns. It involves data preprocessing, scaling pixel values (dividing by 255), model training, and evaluation using techniques like CNNs or SVM for image recognition.</p>
+        <div class="tags"><span class="tag">Deep Learning</span><span class="tag">Computer Vision</span><span class="tag">Python</span></div>
+        <a class="btn btn-primary btn-sm" href="projects/Image Classifier.html">View Details <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="empty-state" data-project-empty style="display:none;">No projects match that search yet — try another term or filter.</div>
+  </div>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <span>&copy; 2026 Amaya Devindi. Built with care.</span>
+    <span class="footer-social">
+      <a href="https://github.com/AmayaDevindi" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+      
+    </span>
+  </div>
+</footer>
+<script src="assets/js/site.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  SiteFilter.init({
+    itemSelector: '.project-card',
+    chipSelector: '.filter-chip',
+    searchSelector: '[data-project-search]',
+    emptySelector: '[data-project-empty]',
+    dataAttr: 'data-tags'
+  });
+});
+</script>
 </body>
 </html>
