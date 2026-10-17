@@ -116,6 +116,40 @@
             object-fit: contain; /* Ensures the whole image is visible */
             cursor: pointer;
         }
+
+        /* --- ROLE TIMELINE (AIESEC & GAVEL CLUB) --- */
+        .role-timeline {
+            position: relative;
+            list-style: none;
+            margin: 0.5rem 0 0 0.5rem;
+            padding-left: 1.75rem;
+            border-left: 2px solid rgba(233, 79, 100, 0.4);
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.4rem;
+            opacity: 0;
+            transform: translateX(-16px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item.visible { opacity: 1; transform: translateX(0); }
+        .timeline-dot {
+            position: absolute;
+            left: calc(-1.75rem - 8px);
+            top: 0.2rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 9999px;
+            background: #1A1A1A;
+            border: 3px solid #E94F64;
+            box-shadow: 0 0 10px rgba(233, 79, 100, 0.6);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .timeline-item:hover .timeline-dot { background: #FFC300; border-color: #FFC300; }
+        @media (prefers-reduced-motion: reduce) {
+            .timeline-item { opacity: 1; transform: none; transition: none; }
+        }
     </style>
 </head>
 <body onload="initPortfolio()">
@@ -208,6 +242,26 @@
                                 <p class="text-secondary-text">Participated in the preliminary round of Ecovision 2026, an inter-university Business Case Competition organized by Universal College Lanka (UCL) in partnership with the MAS Foundation for Change, along with the accompanying Workshop on Social Impact Entrepreneurship.</p>
                             </div>
                         </div>
+                        <div class="base-card academic-glow academic-card flex flex-col h-full w-full p-0 border-t-4 border-academic-blue">
+                            <div class="w-full image-container p-4 flex items-center justify-center bg-main-bg/70 rounded-t-xl"
+                                onclick="openModal('images/academic_and_extra/SO%2019.jpeg')" style="min-height: 200px;">
+                                <div class="relative max-w-full h-full cursor-pointer group">
+                                    <img src="images/academic_and_extra/SO%2019.jpeg" alt="Speech Olympiad XIX certificate"
+                                         class="max-w-full max-h-[250px] object-contain rounded-lg transition duration-300 group-hover:scale-[1.02] group-hover:opacity-80"
+                                         style="border: 3px solid #4E93FF; max-height: 250px;"
+                                         onerror="this.onerror=null; this.src='https://placehold.co/400x300/4E93FF/F0F0F0?text=Certificate+Missing';">
+                                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 bg-black/30 rounded-lg">
+                                        <i class="fas fa-search-plus text-5xl text-accent-yellow drop-shadow-lg"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full p-6 flex flex-col justify-start bg-card-bg rounded-none flex-grow">
+                                <h3 class="text-2xl font-extrabold text-light-text mb-4 pb-2 border-b border-white/10 flex items-center">
+                                    <i class="fas fa-microphone mr-3 text-academic-blue"></i> Speech Olympiad XIX
+                                </h3>
+                                <p class="text-secondary-text">Competed in the preliminary round of Speech Olympiad XIX, the intra-university speech contest organized by the Gavel Club of the University of Moratuwa.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -218,7 +272,7 @@
         <section id="extracurriculars" class="py-16 px-4 bg-card-bg">
             <h2 class="section-title">EXTRACURRICULAR ACTIVITIES</h2>
             <p class="text-lg text-secondary-text max-w-3xl mb-8 mx-auto text-center">
-                Showcasing consistent participation in various school events and activities.
+                Showcasing consistent participation in university and school events and activities.
             </p>
             
             <!-- Updated the container to use a standard responsive grid for dynamic spanning -->
@@ -279,7 +333,7 @@
             // Original Academic Results (now displayed in a custom layout)
             results: [
                 { 
-                    title: "Advanced Level Examination (A/L)", 
+                    title: "Advanced Level Examination (A/L)", subtitle: "Mathematics stream · 2024", 
                     icon: "fa-calculator",
                     // REPLACE THIS URL with your A/L Certificate Image URL
                     imageUrl: "images/academic_and_extra/AL.png", 
@@ -292,7 +346,7 @@
                     ] 
                 },
                 { 
-                    title: "Ordinary Level Examination (O/L)", 
+                    title: "Ordinary Level Examination (O/L)", subtitle: "8 A's and 1 B · 2021", 
                     icon: "fa-book-reader",
                     // REPLACE THIS URL with your O/L Certificate Image URL
                     imageUrl: "images/academic_and_extra/OL.png", 
@@ -313,8 +367,10 @@
             
             // Education History Data 
             educationHistory: [
-                { institution: "University of Moratuwa", type: "University", startYear: "2025", endYear: "", status: "Studying", details: "Studies in Business Science.", icon: "fa-graduation-cap" },
-                { institution: "Sirimavo Bandaranaike Vidyalaya, Colombo", type: "School", startYear: 2016, endYear: 2023, status: "Finished", details: "", icon: "fa-school" },
+                { institution: "University of Moratuwa", type: "University", startYear: "2025", endYear: "Present", status: "Studying", details: "Bachelor of Business Science (Honours), specializing in Business Analytics. Current GPA: 3.85.", icon: "fa-graduation-cap" },
+                { institution: "University of Moratuwa", type: "External Degree", startYear: "2025", endYear: "Present", status: "Studying", details: "Bachelor of Information Technology (BIT), following alongside the BBSc.", icon: "fa-laptop-code" },
+                { institution: "British Council, Colombo", type: "English Course", startYear: "2023", endYear: "2023", status: "Finished", details: "Secondary Plus B1.2, three terms completed with mostly A grades.", icon: "fa-book-open" },
+                { institution: "Sirimavo Bandaranaike Vidyalaya, Colombo", type: "School", startYear: 2016, endYear: 2024, status: "Finished", details: "G.C.E. O/L (2021) and A/L in the Mathematics stream (2024).", icon: "fa-school" },
                 { institution: "Seventh-Day Adventist High School, Kandana", type: "School", startYear: 2011, endYear: 2016, status: "Finished", details: "", icon: "fa-tools" },
               //{ institution: "Online Python Course", type: "Certification", startYear: 2023, endYear: 2023, status: "Finished", details: "Advanced certification in Data Structures and Algorithm implementation.", icon: "fa-laptop-code" },
               //{ institution: "Future Tech High School", type: "School", startYear: 2005, endYear: 2009, status: "Finished", details: "Primary level education completed.", icon: "fa-chalkboard-teacher" }
@@ -323,16 +379,16 @@
             // Language Data
             languages: [
                 { name: "Sinhala", proficiency: "Native Speaker", certificateStatus: "" },
-                { name: "Tamil", proficiency: "", certificateStatus: "" },
+                { name: "Tamil", proficiency: "Basic speaking, good reading and writing", certificateStatus: "" },
                 { 
                     name: "English", 
-                    proficiency: "", 
-                    certificateStatus: "",
+                    proficiency: "PTE Academic – Overall 90", 
+                    certificateStatus: "British Council Secondary Plus B1.2 (2023), three terms completed with mostly A grades.",
                     certificates: [
-                        { name: "", url: "images/academic_and_extra/ptea.png" },
-                        { name: "", url: "images/academic_and_extra/eng_cer_1.jpg" },
-                        { name: "", url: "images/academic_and_extra/eng_cer_2.jpg" },
-                        { name: "", url: "images/academic_and_extra/eng_cer_3.jpg" }
+                        { name: "PTE Academic", url: "images/academic_and_extra/ptea.png" },
+                        { name: "British Council – Term 1", url: "images/academic_and_extra/eng_cer_1.jpg" },
+                        { name: "British Council – Term 2", url: "images/academic_and_extra/eng_cer_2.jpg" },
+                        { name: "British Council – Term 3", url: "images/academic_and_extra/eng_cer_3.jpg" }
                     ]
                 }
             ]
@@ -341,11 +397,59 @@
         // Extracurricular/Sports Data - UPDATED FOR DYNAMIC SPANNING AND MULTIPLE IMAGES
         const extracurricularData = [
             {
-                // 1. ART EXHIBITIONS: SPAN 3, 4 IMAGES (full row)
+                // 1. AIESEC: SPAN 2, TIMELINE OF ROLES
+                title: "AIESEC in University of Moratuwa",
+                type: "leadership",
+                icon: "fa-globe-asia",
+                span: 2,
+                images: [],
+                stats: [],
+                timeline: [
+                    { period: "Summer Term 26.27", role: "Team Member", unit: "Information Management" },
+                    { period: "Summer Term 26.27", role: "OC Team Member, Partnership Development", unit: "Global Village 2026" },
+                    { period: "Summer Term 26.27", role: "OC Vice President, Partnership Development", unit: "Winter Induction 2026" },
+                    { period: "Winter Term 26.27 – Present", role: "Team Member", unit: "oGV Value Delivery" },
+                    { period: "Winter Term 26.27 – Present", role: "Team Member", unit: "iGV B2B Special Team" },
+                    { period: "Winter Term 26.27 – Present", role: "OC Team Member, Delegates", unit: "LEAD CS 13.0" }
+                ],
+                participation_focus: ""
+            },
+            {
+                // 2. GAVEL CLUB: SPAN 1, TIMELINE OF ROLES
+                title: "Gavel Club, UoM",
+                type: "leadership",
+                icon: "fa-microphone",
+                span: 1,
+                images: [],
+                stats: [],
+                timeline: [
+                    { period: "Step 1", role: "Member", unit: "Gavel Club, University of Moratuwa" },
+                    { period: "Step 2", role: "Timer, Table Topics Master", unit: "Club meetings" },
+                    { period: "Speech Olympiad XIX", role: "Finance Team Member", unit: "Helped raise and contact partners" },
+                    { period: "Speech Olympiad XIX", role: "Competitor", unit: "Preliminary round" }
+                ],
+                participation_focus: ""
+            },
+            {
+                // 3. SWIMMING: SPAN 1, 3 IMAGES
+                title: "Swimming",
+                type: "sports",
+                icon: "fa-water",
+                span: 1,
+                images: [
+                    { name: "Freshers' Meet 2026", url: "images/academic_and_extra/uni_sports_cer_1.jpg" },
+                    { name: "Freshers' Meet 2026", url: "images/academic_and_extra/uni_sports_cer_2.jpg" },
+                    { name: "Swimming", url: "images/academic_and_extra/swim.png" }
+                ],
+                stats: [],
+                participation_focus: "Swam for more than two years in school and took part in the Freshers' Sports Meet at the University of Moratuwa."
+            },
+            {
+                // 4. ART EXHIBITIONS: SPAN 2, 4 IMAGES
                 title: "Art Exhibitions & Competitions",
                 type: "creative",
                 icon: "fa-brush text-sports-red",
-                span: 3, // Full row on large screens
+                span: 2,
                 images: [ 
                     { name: "2020", url: "images/academic_and_extra/art_cer_3.jpg" }, 
                     { name: "2018", url: "images/academic_and_extra/art_cer_4.jpg" }, 
@@ -356,37 +460,6 @@
                     { name: "Click to View", grade: `<a href="aesthetic.html" class="text-sports-red underline hover:text-red-400 transition">Art Gallery</a>` }
                 ],
                 participation_focus: "Active participation and multiple achievements in school art exhibitions and competitions over the years."
-            },
-            {
-                // 2. SWIMMING: SPAN 1, 1 IMAGE (one column)
-                title: "Swimming",
-                type: "sports",
-                icon: "fa-water",
-                span: 1, // Single column on large screens
-                images: [
-                    { name: "Swimming", url: "images/academic_and_extra/swim.png" }
-                ],
-                stats: [
-                    { name: "Duration", grade: "2+ Yrs" },
-                  //{ name: "Focus", grade: "Fitness" } 
-                ],
-                participation_focus: "Consistent engagement in swimming activities over two years."
-            },
-            {
-                // 3. ANNUAL SPORTS: SPAN 2, 2 IMAGES (two columns)
-                title: "School Sports Events",
-                type: "sports",
-                icon: "fa-running",
-                span: 2, // one columns on large screens
-                images: [
-                    { name: "2019", url: "images/academic_and_extra/sport_cer_1.jpg" },
-                    { name: "2016", url: "images/academic_and_extra/sport_cer_2.jpg" }
-                ],
-                stats: [
-                   //{ name: "Schedule", grade: "Annual" },
-                   //{ name: "Role", grade: "House Rep." }
-                ],
-                participation_focus: "Active involvement in school sport events."
             }
         ];
 
@@ -394,7 +467,7 @@
         const standardStatBox = (stat) => `
             <div class="stat-subject-box text-center p-2 rounded-lg bg-main-bg/50 border border-white/10">
                 <p class="text-xs text-secondary-text uppercase truncate">${stat.name}</p>
-                <p class="text-xl font-black ${stat.name === 'Z-Score' ? 'text-accent-yellow' : 'text-light-text'}">${stat.grade}</p>
+                <p class="${stat.grade.length > 6 && !stat.grade.startsWith('<') ? 'text-sm' : 'text-xl'} font-black ${stat.name === 'Z-Score' ? 'text-accent-yellow' : 'text-light-text'}">${stat.grade}</p>
             </div>
         `;
 
@@ -435,25 +508,6 @@
                     </div>
                 `;
 
-            } else if (item.title === "Grade 5 Scholarship Exam") {
-                // Scholarship: Custom single-line display
-                const scoreStat = item.stats[0]; 
-                
-                // Custom single-line display: 'Score: 179/200'
-                const singleLineScoreBox = `
-                    <div class="stat-subject-box p-3 text-center rounded-lg bg-main-bg/50 border border-white/20 w-full">
-                        <p class="text-lg md:text-xl font-bold text-secondary-text">
-                            <span class="uppercase font-semibold">${scoreStat.name}:</span>
-                            <span class="font-black text-light-text ml-2">${scoreStat.grade}</span> 
-                        </p>
-                    </div>
-                `;
-
-                statsHtml = `
-                    <div class="mt-3 flex justify-start w-full">
-                        ${singleLineScoreBox}
-                    </div>
-                `;
             }
 
             return statsHtml;
@@ -506,6 +560,7 @@
                         <h3 class="text-2xl font-extrabold text-light-text mb-4 pb-2 border-b border-white/10 flex items-center">
                             <i class="fas ${item.icon} mr-3 text-academic-blue"></i> ${item.title}
                         </h3>
+                        ${item.subtitle ? `<p class="text-sm text-secondary-text -mt-2 mb-4">${item.subtitle}</p>` : ''}
                         ${contentHtml}
                     </div>
                 </div>
@@ -522,37 +577,13 @@
             container.innerHTML = '';
 
             // 1. Separate the card data
-            const [alCardData, olCardData, scholarshipCardData] = academicPortfolio.results;
-            
-            // 2. Render cards
-            const alCardRendered = createAcademicCard(alCardData);
-            const olCardRendered = createAcademicCard(olCardData);
-            const scholarshipCardRendered = createAcademicCard(scholarshipCardData);
+            const [alCardData, olCardData] = academicPortfolio.results;
 
-            // 3. Combine everything into the new two-column responsive grid layout
+            // 2. Render cards side by side (A/L | O/L)
             container.innerHTML = `
-                <div class="space-y-6">
-                    <!-- Main Grid: Two columns (A/L Stack | O/L) side-by-side on large screens -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-                        
-                        <!-- COLUMN 1: A/L + Scholarship (Stacked vertically with 2:1 height proportion) -->
-                        <div class="flex flex-col gap-6 h-full">
-                            <!-- A/L: 2/3 proportion using flex properties -->
-                            <div style="flex: 2 1 0%; min-height: fit-content;"> 
-                                ${alCardRendered}
-                            </div>
-                            <!-- Scholarship: 1/3 proportion using flex properties -->
-                            <div style="flex: 1 1 0%; min-height: fit-content;"> 
-                                ${scholarshipCardRendered}
-                            </div>
-                        </div>
-                        
-                        <!-- COLUMN 2: O/L (Single Card) -->
-                        <div>
-                            ${olCardRendered}
-                        </div>
-                        
-                    </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+                    <div>${createAcademicCard(alCardData)}</div>
+                    <div>${createAcademicCard(olCardData)}</div>
                 </div>
             `;
         }
@@ -650,7 +681,7 @@
                                 </div>
 
                                 <!-- Certificates Column (75% on desktop, full width on mobile) -->
-                                <div class="p-4 lg:w-3/4 flex-grow grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                <div class="p-4 lg:w-3/4 flex-grow grid grid-cols-2 sm:grid-cols-4 gap-3">
                                     ${certificateLinks}
                                 </div>
                             </div>
@@ -664,6 +695,8 @@
                             <div class="flex flex-col">
                                 <h3 class="text-2xl font-black text-light-text">${item.name}</h3>
                                 <p class="text-secondary-text text-sm">${item.proficiency}</p>
+                            </div>
+                        </div>
                     `;
                 }
 
@@ -678,6 +711,7 @@
          * Generates the HTML for the certificate/image section of the extracurricular card.
          */
         const createExtracurricularImageSection = (images) => {
+            if (!images || images.length === 0) return '';
             // Determine the responsive grid layout based on the number of images
             let imageGridClasses = 'grid grid-cols-2 gap-3 p-4';
             if (images.length <= 1) {
@@ -686,6 +720,8 @@
             } else if (images.length === 2) {
                 // For 2 images, 1x2 grid on mobile, 2 columns on desktop
                 imageGridClasses = 'grid grid-cols-2 gap-3 p-4';
+            } else if (images.length === 3) {
+                imageGridClasses = 'grid grid-cols-3 gap-3 p-4';
             } else if (images.length === 4) {
                  // For 4 images, 2x2 grid
                 imageGridClasses = 'grid grid-cols-4 gap-3 p-4';
@@ -727,12 +763,29 @@
          */
         const createExtracurricularCard = (item) => {
             const spanClass = item.span ? `lg:col-span-${item.span}` : 'lg:col-span-1'; 
-            const iconColor = item.type === 'sports' ? 'text-sports-red' : 'text-accent-yellow';
+            const iconColor = item.type === 'creative' ? 'text-accent-yellow' : 'text-sports-red';
 
             const imageSectionHtml = createExtracurricularImageSection(item.images);
 
-            // Stats section: auto-fit grid for dynamic length
+            // Stats section: auto-fit grid for dynamic length (only when there are stats)
             const statsHtml = item.stats.map(standardStatBox).join('');
+            const statsRow = item.stats.length ? `
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-4"
+                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+                    ${statsHtml}
+                </div>` : '';
+
+            // Timeline of roles (animated on scroll)
+            const timelineHtml = item.timeline ? `
+                <ol class="role-timeline">
+                    ${item.timeline.map((t, i) => `
+                        <li class="timeline-item" style="transition-delay: ${i * 120}ms">
+                            <span class="timeline-dot"></span>
+                            <p class="text-xs font-semibold uppercase tracking-wide text-accent-yellow">${t.period}</p>
+                            <p class="text-lg font-bold text-light-text leading-snug">${t.role}</p>
+                            <p class="text-sm text-secondary-text">${t.unit}</p>
+                        </li>`).join('')}
+                </ol>` : '';
 
             return `
             <div class="base-card extracurricular-glow ${spanClass} border-t-4 border-sports-red">
@@ -741,14 +794,9 @@
                 <h3 class="text-2xl font-extrabold text-light-text mb-4 pb-2 border-b border-white/10 flex items-center">
                     <i class="fas ${item.icon} mr-3 ${iconColor}"></i> ${item.title}
                 </h3>
-                <!-- Stats Row: auto-fit grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 mb-4"
-                     style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
-                    ${statsHtml}
-                </div>
-                <p class="text-sm text-secondary-text flex-grow mt-auto">
-                    ${item.participation_focus}
-                </p>
+                ${statsRow}
+                ${timelineHtml}
+                ${item.participation_focus ? `<p class="text-sm text-secondary-text flex-grow mt-auto">${item.participation_focus}</p>` : ''}
                 </div>
             </div>
             `;
@@ -767,6 +815,19 @@
             const cardHtml = createExtracurricularCard(item);
             container.innerHTML += cardHtml;
             });
+
+            // Reveal timeline steps one by one as they scroll into view
+            const items = container.querySelectorAll('.timeline-item');
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+                    });
+                }, { threshold: 0.2 });
+                items.forEach(el => observer.observe(el));
+            } else {
+                items.forEach(el => el.classList.add('visible'));
+            }
         }
         
         // --- INITIALIZATION ---
