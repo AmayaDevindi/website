@@ -1,0 +1,18 @@
+{
+  "name": "Amaya Devindi",
+  "role": "Business Analytics & IT Student",
+  "avatar": "images/main/image.png",
+  "taglineHtml": "I am a passionate explorer of technology and creativity, blending strong <b>Academic</b> foundations with real-world application in my <b>Projects</b>. I thrive on <b>Self Learning</b>, enjoy my <b>Hobbies</b>, and use my <b>Aesthetic</b> sense to design beautiful and functional experiences.",
+  "resumeFile": "resume/Amaya-Devindi-Resume.pdf",
+  "email": "REPLACE_WITH_YOUR_EMAIL@example.com",
+  "github": "https://github.com/AmayaDevindi",
+  "contactFormEndpoint": "https://formspree.io/f/YOUR_FORM_ID",
+  "sections": [
+    { "key": "projects", "label": "Projects", "href": "projects.html", "icon": "fa-diagram-project", "desc": "Machine learning, web apps, and hands-on builds." },
+    { "key": "academic", "label": "Academic & Extracurricular", "href": "academic_and_extracurricular.html", "icon": "fa-graduation-cap", "desc": "Grades, education history, languages, and activities." },
+    { "key": "self-learning", "label": "Self Learning", "href": "self_learning.html", "icon": "fa-book-open", "desc": "Certificates, tools, and ongoing learning tracks." },
+    { "key": "hobbies", "label": "Hobbies", "href": "hobbies.html", "icon": "fa-seedling", "desc": "A look into my home garden." },
+    { "key": "aesthetic", "label": "Aesthetic", "href": "aesthetic.html", "icon": "fa-palette", "desc": "Drawings, paintings, and creative process." },
+    { "key": "community", "label": "Community Resources", "href": "community_resourses/community_resourses.html", "icon": "fa-people-group", "desc": "Notes and study materials I used myself." }
+  ]
+}
