@@ -1,0 +1,169 @@
+        <!-- Projects Section: coverflow carousel -->
+        <section id="projects" class="projects-section">
+            <h2 class="text-3xl font-semibold text-primary-blue mb-4 text-center">Featured Projects</h2>
+
+            <div class="carousel-wrap">
+                <div class="cf-stage-wrap"><div class="cf-stage" id="cfStage"></div></div>
+                <div class="cf-nav">
+                    <button id="cfPrev" aria-label="Previous project"><i class="fas fa-arrow-left"></i></button>
+                    <button id="cfNext" aria-label="Next project"><i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="cf-modal-backdrop" id="cfModalBackdrop">
+                <div class="cf-modal-box">
+                    <button class="cf-modal-close" id="cfModalClose" aria-label="Close"><i class="fas fa-times"></i></button>
+                    <img id="cfModalImg" src="" alt="">
+                    <div class="cf-modal-content">
+                        <h2 id="cfModalTitle"></h2>
+                        <p id="cfModalBody"></p>
+                        <a class="cf-modal-link" id="cfModalLink" href="#" target="_blank" rel="noopener">
+                            <span id="cfModalLinkLabel">View Details</span>
+                            <i class="fas fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="section-divider">
+        </section>
+
+        <script>
+        (function () {
+            var projects = [
+                {
+                    img: 'images/projects/P8.png',
+                    title: 'Sri Lankan Investment Guidance Tool',
+                    teaser: 'Helps everyday Sri Lankans split their money across investment options — currently in progress.',
+                    full: 'A machine learning tool that helps everyday Sri Lankans see how to split their money across investment options — stocks, unit trusts, T-bills/bonds, and fixed deposits — with expected return ranges, chance of loss, and a comparison against FDs after inflation. Built with Python for the forecasting models and a Next.js/TypeScript frontend. Educational only, not financial advice. Currently being built with my team.',
+                    link: 'https://github.com/AmayaDevindi/ModelX', linkLabel: 'View Repo'
+                },
+                {
+                    img: 'images/projects/P1.png',
+                    title: 'Virtual Hand Gesture Controller',
+                    teaser: 'Hands-free control via webcam gestures — scroll, navigate, and control programs without touching a keyboard.',
+                    full: 'A hands-free computer interaction system built with OpenCV, MediaPipe, and PyAutoGUI. Detects real-time hand gestures via webcam to control scrolling, slide navigation, and program states. Features custom gestures (thumbs up/down, left/right) for precise control, ideal for presentations or touchless navigation.',
+                    link: 'https://github.com/AmayaDevindi/Virtual-Hand-Gesture-Controller', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P2.png',
+                    title: 'Home Garden Management Database',
+                    teaser: "A home gardener's database for tracking plants, seeds, and growth from planting to harvest.",
+                    full: 'A structured SQLite database for managing a home garden. Tracks plants, seeds, planting history, sections, and germination progress. Designed to help gardeners make informed, data-driven decisions about care schedules, growth tracking, and optimal planting conditions.',
+                    link: 'https://github.com/AmayaDevindi/Home-Garden-Database', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P3.png',
+                    title: 'Tea Leaf Disease Identification Model',
+                    teaser: 'A CNN model that spots tea leaf disease early, built for real agricultural screening.',
+                    full: 'A Deep Learning classification model built with MobileNetV2 Transfer Learning. Detects and accurately classifies 8 distinct tea leaf conditions (seven diseases and the healthy state) from image input. This project delivers a ready-to-deploy Keras asset and the complete training notebook, providing a robust, automated screening solution for tea crop health and agricultural monitoring.',
+                    link: 'https://github.com/AmayaDevindi/Tea-Leaf-Disease-Identification-Model', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P6.png',
+                    title: 'R Package for Data Cleaning & Inspection',
+                    teaser: 'A friendly R package that cleans messy datasets in just a few function calls.',
+                    full: 'A beginner-friendly R package for cleaning and inspecting datasets. Includes functions to clean column names, check missing values, and detect outliers, making exploratory data analysis faster and easier. Ideal for students, analysts, and data enthusiasts working with small to medium datasets.',
+                    link: 'https://github.com/AmayaDevindi/cleanyr', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P7.jpg',
+                    title: 'LankaDrive Auto Sales',
+                    teaser: 'A full car dealership website — listings, reviews, and a working contact form.',
+                    full: 'A multi-page website designed for a car sales company. Features a hero banner, vehicle listings, services, customer reviews, and a contact inquiry form. Built with pure HTML and CSS with a clean, professional automotive aesthetic.',
+                    link: 'https://amayadevindi.github.io/lankadrive/', linkLabel: 'Go to website'
+                },
+                {
+                    img: 'images/projects/P4.png',
+                    title: 'Customer Churn Prediction',
+                    teaser: 'Predicts which subscribers are about to churn, so retention teams can act first.',
+                    full: 'A machine learning project that predicts whether a customer will cancel their subscription based on behavioral and demographic data. It uses classification models such as Random Forest and SVM to identify key churn factors and help improve customer retention strategies.',
+                    link: 'projects/Customer Churn Prediction for a Subscription Service.html', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P5.png',
+                    title: 'Image Classifier',
+                    teaser: 'Classifies images into categories by learning their visual patterns.',
+                    full: 'A deep learning project that classifies images into different categories by learning visual patterns. It involves data preprocessing, scaling pixel values (dividing by 255), model training, and evaluation using techniques like CNNs or SVM for image recognition.',
+                    link: 'projects/Image Classifier.html', linkLabel: 'View Details'
+                }
+            ];
+
+            var stage = document.getElementById('cfStage');
+            var current = 0;
+            var cards = [];
+
+            projects.forEach(function (p, i) {
+                var el = document.createElement('div');
+                el.className = 'cf-card';
+                el.innerHTML = '<img src="' + p.img + '" alt="' + p.title + '">' +
+                    '<div class="cf-body"><h3>' + p.title + '</h3><p>' + p.teaser + '</p>' +
+                    '<div class="cf-hint"><i class="fas fa-expand"></i> Click for details</div></div>';
+                el.addEventListener('click', function () {
+                    if (i === current) { openModal(p); } else { goTo(i); }
+                });
+                stage.appendChild(el);
+                cards.push(el);
+            });
+
+            function layout() {
+                var n = cards.length;
+                var cardWidth = cards[0] ? cards[0].offsetWidth : 280;
+                var stepX = cardWidth * 0.55;
+                var stepZ = cardWidth * 0.42;
+
+                cards.forEach(function (card, i) {
+                    var offset = i - current;
+                    if (offset > n / 2) offset -= n;
+                    if (offset < -n / 2) offset += n;
+                    var abs = Math.abs(offset);
+
+                    var rot = Math.max(-55, Math.min(55, offset * -32));
+                    var tx = offset * stepX;
+                    var tz = -abs * stepZ;
+                    var scale = Math.max(0.68, 1 - abs * 0.14);
+
+                    card.style.marginLeft = (-cardWidth / 2) + 'px';
+                    card.style.marginTop = (-(cards[0] ? cards[0].offsetHeight : 330) / 2) + 'px';
+                    card.style.transform = 'translateX(' + tx + 'px) translateZ(' + tz + 'px) rotateY(' + rot + 'deg) scale(' + scale + ')';
+                    card.style.filter = 'blur(' + Math.min(abs * 2.2, 6) + 'px)';
+                    card.style.opacity = abs > 3 ? 0 : (1 - abs * 0.22);
+                    card.style.zIndex = 100 - abs;
+                    card.classList.toggle('active', offset === 0);
+                });
+            }
+
+            function goTo(i) {
+                var n = cards.length;
+                current = ((i % n) + n) % n;
+                layout();
+            }
+
+            document.getElementById('cfPrev').addEventListener('click', function () { goTo(current - 1); });
+            document.getElementById('cfNext').addEventListener('click', function () { goTo(current + 1); });
+            window.addEventListener('resize', layout);
+
+            layout();
+
+            var backdrop = document.getElementById('cfModalBackdrop');
+            var modalImg = document.getElementById('cfModalImg');
+            var modalTitle = document.getElementById('cfModalTitle');
+            var modalBody = document.getElementById('cfModalBody');
+            var modalLink = document.getElementById('cfModalLink');
+            var modalLinkLabel = document.getElementById('cfModalLinkLabel');
+
+            function openModal(p) {
+                modalImg.src = p.img;
+                modalImg.alt = p.title;
+                modalTitle.textContent = p.title;
+                modalBody.textContent = p.full;
+                modalLink.href = p.link;
+                modalLinkLabel.textContent = p.linkLabel;
+                backdrop.classList.add('open');
+            }
+            function closeModal() { backdrop.classList.remove('open'); }
+            document.getElementById('cfModalClose').addEventListener('click', closeModal);
+            backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+        })();
+        </script>
