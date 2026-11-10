@@ -40,110 +40,91 @@
             box-shadow: 0 6px 20px rgba(76, 124, 255, 0.3); 
         }
         
-        /* --- PREMIUM PROJECT CARD STYLING --- */
+        /* --- COVERFLOW PROJECT CAROUSEL --- */
+        html, body { overflow-x: hidden; }
 
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
+        .carousel-wrap { margin-top: 40px; }
 
-        .project-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
+        .cf-stage-wrap {
+            position: relative;
+            height: clamp(300px, 42vw, 440px);
+            margin: 0 auto;
+            max-width: 100%;
             overflow: hidden;
-            /* Layered shadow for initial depth */
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6), 
-                        0 0 10px rgba(76, 124, 255, 0.1); 
-            /* Premium, smoother transition with cubic-bezier */
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s ease;
-            /* Very subtle inner border for a cleaner edge */
-            border: 1px solid rgba(255, 255, 255, 0.05); 
+            perspective: 1400px;
+            perspective-origin: 50% 45%;
+        }
+        .cf-stage { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+
+        .cf-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: clamp(190px, 28vw, 280px);
+            height: clamp(230px, 32vw, 330px);
+            background-color: var(--card-bg);
+            border: 1px solid rgba(76, 124, 255, 0.25);
+            border-radius: 16px;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
+            backface-visibility: hidden;
+            transition: transform 0.6s cubic-bezier(0.22, 0.8, 0.3, 1), filter 0.6s ease, opacity 0.6s ease, box-shadow 0.6s ease;
+            will-change: transform, filter;
         }
+        .cf-card img { width: 100%; height: clamp(110px, 16vw, 150px); object-fit: cover; display: block; border-bottom: 1px solid rgba(76, 124, 255, 0.3); }
+        .cf-card .cf-body { padding: clamp(12px, 2vw, 18px); display: flex; flex-direction: column; flex: 1; }
+        .cf-card h3 { font-size: clamp(0.85rem, 1.6vw, 1rem); margin: 0 0 8px; font-weight: 800; line-height: 1.3; color: #fff; }
+        .cf-card p { color: #9aa7c2; font-size: clamp(0.72rem, 1.3vw, 0.8rem); line-height: 1.5; margin: 0; }
+        .cf-card.active { box-shadow: 0 30px 60px rgba(76, 124, 255, 0.35), 0 0 0 1px rgba(76, 124, 255, 0.4) inset; border-color: var(--primary-blue); }
+        .cf-card .cf-hint { display: none; align-items: center; gap: 6px; margin-top: 10px; font-size: 0.7rem; color: var(--primary-blue); font-weight: 700; }
+        .cf-card.active .cf-hint { display: flex; }
 
-        .project-card:hover {
-            transform: translateY(-15px); /* More significant lift */
-            /* Stronger, glowing shadow for interactive focus */
-            box-shadow: 0 20px 50px rgba(76, 124, 255, 0.6), 
-                        0 0 25px rgba(76, 124, 255, 0.2); 
+        .cf-nav { display: flex; justify-content: center; gap: 16px; margin-top: clamp(20px, 3vw, 38px); }
+        .cf-nav button {
+            font-family: inherit; background: var(--card-bg); border: 1px solid rgba(76, 124, 255, 0.25); color: #fff;
+            width: 46px; height: 46px; border-radius: 50%; cursor: pointer; transition: all 0.2s ease; font-size: 1.05rem;
         }
+        .cf-nav button:hover { border-color: var(--primary-blue); background: rgba(76, 124, 255, 0.15); }
 
-        .project-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-            border-bottom: 1px solid rgba(76, 124, 255, 0.5); /* Sharper dividing line */
+        /* Modal */
+        .cf-modal-backdrop {
+            position: fixed; inset: 0; background: rgba(5, 8, 16, 0.82); backdrop-filter: blur(4px);
+            display: none; align-items: center; justify-content: center; z-index: 200; padding: 24px;
         }
-
-        .project-card h3 {
-            color: var(--primary-blue); /* Primary Blue */
-            padding: 20px 20px 10px;
-            margin: 0;
-            text-align: left;
-            font-size: 1.5em; /* Slightly larger title for impact */
-            font-weight: 700; /* Boldness for project titles */
+        .cf-modal-backdrop.open { display: flex; }
+        .cf-modal-box {
+            width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto;
+            background: var(--card-bg); border: 1px solid rgba(76, 124, 255, 0.25); border-radius: 18px;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.6); animation: cfModalIn 0.3s cubic-bezier(0.22, 0.8, 0.3, 1);
         }
-
-        .project-card p {
-            color: #C0C0C0; /* Slightly brighter text for readability */
-            padding: 0 20px 25px; /* Increased bottom padding to space content from button */
-            margin: 0;
-            font-size: 0.9em;
-            flex-grow: 1; 
-            text-align: left;
+        @keyframes cfModalIn { from { opacity: 0; transform: translateY(16px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        .cf-modal-box img { width: 100%; height: clamp(160px, 30vw, 240px); object-fit: cover; display: block; border-bottom: 1px solid rgba(76, 124, 255, 0.25); }
+        .cf-modal-content { padding: 28px 30px 30px; position: relative; }
+        .cf-modal-content h2 { margin: 0 0 14px; font-size: 1.3rem; font-weight: 800; color: #fff; padding-right: 30px; }
+        .cf-modal-content p { margin: 0 0 22px; color: #9aa7c2; font-size: 0.92rem; line-height: 1.65; }
+        .cf-modal-close {
+            position: absolute; top: 14px; right: 14px; background: rgba(11, 17, 32, 0.7); border: 1px solid rgba(76, 124, 255, 0.25);
+            color: #fff; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 0.9rem;
         }
-
-        /* Interactive FULL-WIDTH Button Styling */
-        .project-card .button-small {
-            /* Full-width properties */
-            align-self: stretch; /* Stretch across the width */
-            width: 100%; 
-            margin: 0; /* No margin inside the card */
-            padding: 16px 20px; /* Generous vertical padding */
-            
-            /* Button appearance */
-            background-color: var(--primary-blue); /* Solid blue background */
-            color: var(--card-bg); /* Dark text for contrast */
-            font-weight: 700;
-            text-decoration: none;
-            
-            /* Layout and transition */
-            display: flex;
-            justify-content: center; /* Center content horizontally */
-            align-items: center;
-            gap: 0.75rem;
-            transition: background-color 0.2s ease, transform 0.1s;
-            
-            /* Rounded corners only at the bottom edge */
-            border-radius: 0 0 12px 12px;
+        .cf-modal-close:hover { border-color: var(--primary-blue); }
+        .cf-modal-link {
+            display: inline-flex; align-items: center; gap: 10px; background: var(--primary-blue); color: var(--card-bg);
+            font-weight: 700; padding: 12px 22px; border-radius: 10px; text-decoration: none; transition: all 0.2s ease;
         }
-
-        .project-card .button-small:hover {
-            background-color: #6a97ff; /* Lighter blue on hover */
-            color: white; /* Ensure text is visible */
-            transform: translateY(-1px); /* Subtle lift on hover */
-        }
-        
-        /* Removing the old animated underline (not suitable for full button) */
-        .project-card .button-small::after {
-            content: none;
-        }
+        .cf-modal-link:hover { background: #6a97ff; color: #fff; }
 
         /* Horizontal Rule Style */
         .section-divider {
-            margin: 40px auto; 
+            margin: 40px auto;
             width: 60%;
             max-width: 800px;
             border: none;
             height: 1px;
             background: linear-gradient(to right, transparent, rgba(76, 124, 255, 0.5), transparent);
         }
-        /* --- END OF PREMIUM PROJECT CARD STYLING --- */
+        /* --- END OF COVERFLOW PROJECT CAROUSEL --- */
     </style>
 </head>
 <body>
@@ -170,117 +151,175 @@
             </p>
         </header>
 
-        <!-- Projects Section (Now styled by the custom CSS) -->
+        <!-- Projects Section: coverflow carousel -->
         <section id="projects" class="projects-section">
-            <h2 class="text-3xl font-semibold text-primary-blue mb-12 text-center">Featured Projects</h2>
-            
-            <div class="projects-grid">
-                <!-- Project: Sri Lankan Investment Guidance Tool -->
-                <div class="project-card">
-                    <img src="images/projects/P8.png" alt="Sri Lankan Investment Guidance Tool - candlestick chart">
-                    <h3 style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                        <span>Sri Lankan Investment Guidance Tool</span>
-                        <span style="font-size:0.6em; font-weight:700; padding:3px 10px; border-radius:999px; background:rgba(251,191,36,0.15); color:#fbbf24; border:1px solid rgba(251,191,36,0.4); letter-spacing:0.03em;">WORK IN PROGRESS</span>
-                    </h3>
-                    <p>A machine learning tool that helps everyday Sri Lankans see how to split their money across investment options &mdash; stocks, unit trusts, T-bills/bonds, and fixed deposits &mdash; with expected return ranges, chance of loss, and a comparison against FDs after inflation. Built with Python for the forecasting models and a Next.js/TypeScript frontend. Educational only, not financial advice. Currently being built with my team.</p>
-                    <a href="https://github.com/AmayaDevindi/ModelX" class="button-small">
-                        <span>View Repo</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
+            <h2 class="text-3xl font-semibold text-primary-blue mb-4 text-center">Featured Projects</h2>
 
-                
-                <!-- Project 1: Virtual Hand Gesture Controller -->
-                <div class="project-card">
-                    <img src="images/projects/P1.png" alt="Virtual Hand Gesture Controller">
-                    <h3>Virtual Hand Gesture Controller</h3>
-                    <p>A hands-free computer interaction system built with <b>OpenCV, MediaPipe, and PyAutoGUI</b>. 
-                        Detects real-time hand gestures via webcam to control scrolling, slide navigation, and program states. 
-                        Features custom gestures (thumbs up/down, left/right) for precise control, ideal for presentations or touchless navigation.
-                    </p>
-                    <a href="https://github.com/AmayaDevindi/Virtual-Hand-Gesture-Controller" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
+            <div class="carousel-wrap">
+                <div class="cf-stage-wrap"><div class="cf-stage" id="cfStage"></div></div>
+                <div class="cf-nav">
+                    <button id="cfPrev" aria-label="Previous project"><i class="fas fa-arrow-left"></i></button>
+                    <button id="cfNext" aria-label="Next project"><i class="fas fa-arrow-right"></i></button>
                 </div>
-                
-                <!-- Project 2: Home-Garden-Database -->
-                <div class="project-card">
-                    <img src="images/projects/P2.png" alt="Home-Garden-Database">
-                    <h3>Home Garden Management Database</h3>
-                    <p>A structured <b>SQLite database</b> for managing a home garden. Tracks plants, seeds, planting history, 
-                        sections, and germination progress. Designed to help gardeners make informed, data-driven decisions 
-                        about care schedules, growth tracking, and optimal planting conditions.
-                    </p>
-                    <a href="https://github.com/AmayaDevindi/Home-Garden-Database" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-                
-                <!-- Project 3: Tea-Leaf-Disease-Identification-Model -->
-                <div class="project-card">
-                    <img src="images/projects/P3.png" alt="Tea Leaf Disease Identification Model">
-                    <h3>Tea Leaf Disease Identification: CNN Deep Learning Trained Model</h3>
-                    <p>A <b>Deep Learning classification model</b> built with <b>MobileNetV2</b> Transfer Learning.
-                        Detects and accurately classifies 8 distinct tea leaf conditions (seven diseases and the healthy state) from image input.This project delivers a ready-to-deploy Keras asset and the complete training notebook, providing a robust, automated screening solution for tea crop health and agricultural monitoring.</p>
-                    <a href="https://github.com/AmayaDevindi/Tea-Leaf-Disease-Identification-Model" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Project 6: cleanyr -->
-                <div class="project-card">
-                    <img src="images/projects/P6.png" alt="cleanyr: R Data Cleaning Package">
-                    <h3>R Package for Data Cleaning & Inspection</h3>
-                    <p>A <b>beginner-friendly R package</b> for cleaning and inspecting datasets. Includes functions to <b>clean column names</b>, <b>check missing values</b>, and <b>detect outliers</b>, making exploratory data analysis faster and easier. Ideal for students, analysts, and data enthusiasts working with small to medium datasets.</p>
-                    <a href="https://github.com/AmayaDevindi/cleanyr" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Project 7: lankadrive -->
-                <div class="project-card">
-                    <img src="images/projects/P7.jpg" alt="LankaDrive Auto Sales Website">
-                    <h3>LankaDrive Auto Sales</h3>
-                    <p>A <b>multi-page website</b> designed for a car sales company. Features a <b>hero banner</b>, <b>vehicle listings</b>, <b>services</b>, <b>customer reviews</b>, and a <b>contact inquiry form</b>. Built with pure HTML and CSS with a clean, professional automotive aesthetic.</p>
-                    <a href="https://amayadevindi.github.io/lankadrive/" class="button-small">
-                        <span>Go to website</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Project 4: Customer Churn Prediction for a Subscription Service -->
-                <div class="project-card">
-                    <img src="images/projects/P4.png" alt="Customer Churn Prediction for a Subscription Service">
-                    <h3>Customer Churn Prediction for a Subscription Service</h3>
-                    <p>A machine learning project that predicts whether a customer will cancel their subscription based on behavioral and demographic data. It uses classification models such as Random Forest and SVM to identify key churn factors and help improve customer retention strategies.</p>
-                    <a href="projects/Customer Churn Prediction for a Subscription Service.html" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Project 5: Image Classifier -->
-                <div class="project-card">
-                    <img src="images/projects/P5.png" alt="Image Classifier">
-                    <h3>Image Classifier</h3>
-                    <p>A deep learning project that classifies images into different categories by learning visual patterns. It involves data preprocessing, scaling pixel values (dividing by 255), model training, and evaluation using techniques like CNNs or SVM for image recognition.</p>
-                    <a href="projects/Image Classifier.html" class="button-small">
-                        <span>View Details</span>
-                        <i class="fas fa-arrow-right text-sm"></i>
-                    </a>
-                </div>
-
-                
-            
-                
             </div>
-            
+
+            <div class="cf-modal-backdrop" id="cfModalBackdrop">
+                <div class="cf-modal-box">
+                    <button class="cf-modal-close" id="cfModalClose" aria-label="Close"><i class="fas fa-times"></i></button>
+                    <img id="cfModalImg" src="" alt="">
+                    <div class="cf-modal-content">
+                        <h2 id="cfModalTitle"></h2>
+                        <p id="cfModalBody"></p>
+                        <a class="cf-modal-link" id="cfModalLink" href="#" target="_blank" rel="noopener">
+                            <span id="cfModalLinkLabel">View Details</span>
+                            <i class="fas fa-arrow-right text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <hr class="section-divider">
         </section>
+
+        <script>
+        (function () {
+            var projects = [
+                {
+                    img: 'images/projects/P8.png',
+                    title: 'Sri Lankan Investment Guidance Tool',
+                    teaser: 'Helps everyday Sri Lankans split their money across investment options — currently in progress.',
+                    full: 'A machine learning tool that helps everyday Sri Lankans see how to split their money across investment options — stocks, unit trusts, T-bills/bonds, and fixed deposits — with expected return ranges, chance of loss, and a comparison against FDs after inflation. Built with Python for the forecasting models and a Next.js/TypeScript frontend. Educational only, not financial advice. Currently being built with my team.',
+                    link: 'https://github.com/AmayaDevindi/ModelX', linkLabel: 'View Repo'
+                },
+                {
+                    img: 'images/projects/P1.png',
+                    title: 'Virtual Hand Gesture Controller',
+                    teaser: 'Hands-free control via webcam gestures — scroll, navigate, and control programs without touching a keyboard.',
+                    full: 'A hands-free computer interaction system built with OpenCV, MediaPipe, and PyAutoGUI. Detects real-time hand gestures via webcam to control scrolling, slide navigation, and program states. Features custom gestures (thumbs up/down, left/right) for precise control, ideal for presentations or touchless navigation.',
+                    link: 'https://github.com/AmayaDevindi/Virtual-Hand-Gesture-Controller', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P2.png',
+                    title: 'Home Garden Management Database',
+                    teaser: "A home gardener's database for tracking plants, seeds, and growth from planting to harvest.",
+                    full: 'A structured SQLite database for managing a home garden. Tracks plants, seeds, planting history, sections, and germination progress. Designed to help gardeners make informed, data-driven decisions about care schedules, growth tracking, and optimal planting conditions.',
+                    link: 'https://github.com/AmayaDevindi/Home-Garden-Database', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P3.png',
+                    title: 'Tea Leaf Disease Identification Model',
+                    teaser: 'A CNN model that spots tea leaf disease early, built for real agricultural screening.',
+                    full: 'A Deep Learning classification model built with MobileNetV2 Transfer Learning. Detects and accurately classifies 8 distinct tea leaf conditions (seven diseases and the healthy state) from image input. This project delivers a ready-to-deploy Keras asset and the complete training notebook, providing a robust, automated screening solution for tea crop health and agricultural monitoring.',
+                    link: 'https://github.com/AmayaDevindi/Tea-Leaf-Disease-Identification-Model', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P6.png',
+                    title: 'R Package for Data Cleaning & Inspection',
+                    teaser: 'A friendly R package that cleans messy datasets in just a few function calls.',
+                    full: 'A beginner-friendly R package for cleaning and inspecting datasets. Includes functions to clean column names, check missing values, and detect outliers, making exploratory data analysis faster and easier. Ideal for students, analysts, and data enthusiasts working with small to medium datasets.',
+                    link: 'https://github.com/AmayaDevindi/cleanyr', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P7.jpg',
+                    title: 'LankaDrive Auto Sales',
+                    teaser: 'A full car dealership website — listings, reviews, and a working contact form.',
+                    full: 'A multi-page website designed for a car sales company. Features a hero banner, vehicle listings, services, customer reviews, and a contact inquiry form. Built with pure HTML and CSS with a clean, professional automotive aesthetic.',
+                    link: 'https://amayadevindi.github.io/lankadrive/', linkLabel: 'Go to website'
+                },
+                {
+                    img: 'images/projects/P4.png',
+                    title: 'Customer Churn Prediction',
+                    teaser: 'Predicts which subscribers are about to churn, so retention teams can act first.',
+                    full: 'A machine learning project that predicts whether a customer will cancel their subscription based on behavioral and demographic data. It uses classification models such as Random Forest and SVM to identify key churn factors and help improve customer retention strategies.',
+                    link: 'projects/Customer Churn Prediction for a Subscription Service.html', linkLabel: 'View Details'
+                },
+                {
+                    img: 'images/projects/P5.png',
+                    title: 'Image Classifier',
+                    teaser: 'Classifies images into categories by learning their visual patterns.',
+                    full: 'A deep learning project that classifies images into different categories by learning visual patterns. It involves data preprocessing, scaling pixel values (dividing by 255), model training, and evaluation using techniques like CNNs or SVM for image recognition.',
+                    link: 'projects/Image Classifier.html', linkLabel: 'View Details'
+                }
+            ];
+
+            var stage = document.getElementById('cfStage');
+            var current = 0;
+            var cards = [];
+
+            projects.forEach(function (p, i) {
+                var el = document.createElement('div');
+                el.className = 'cf-card';
+                el.innerHTML = '<img src="' + p.img + '" alt="' + p.title + '">' +
+                    '<div class="cf-body"><h3>' + p.title + '</h3><p>' + p.teaser + '</p>' +
+                    '<div class="cf-hint"><i class="fas fa-expand"></i> Click for details</div></div>';
+                el.addEventListener('click', function () {
+                    if (i === current) { openModal(p); } else { goTo(i); }
+                });
+                stage.appendChild(el);
+                cards.push(el);
+            });
+
+            function layout() {
+                var n = cards.length;
+                var cardWidth = cards[0] ? cards[0].offsetWidth : 280;
+                var stepX = cardWidth * 0.55;
+                var stepZ = cardWidth * 0.42;
+
+                cards.forEach(function (card, i) {
+                    var offset = i - current;
+                    if (offset > n / 2) offset -= n;
+                    if (offset < -n / 2) offset += n;
+                    var abs = Math.abs(offset);
+
+                    var rot = Math.max(-55, Math.min(55, offset * -32));
+                    var tx = offset * stepX;
+                    var tz = -abs * stepZ;
+                    var scale = Math.max(0.68, 1 - abs * 0.14);
+
+                    card.style.marginLeft = (-cardWidth / 2) + 'px';
+                    card.style.marginTop = (-(cards[0] ? cards[0].offsetHeight : 330) / 2) + 'px';
+                    card.style.transform = 'translateX(' + tx + 'px) translateZ(' + tz + 'px) rotateY(' + rot + 'deg) scale(' + scale + ')';
+                    card.style.filter = 'blur(' + Math.min(abs * 2.2, 6) + 'px)';
+                    card.style.opacity = abs > 3 ? 0 : (1 - abs * 0.22);
+                    card.style.zIndex = 100 - abs;
+                    card.classList.toggle('active', offset === 0);
+                });
+            }
+
+            function goTo(i) {
+                var n = cards.length;
+                current = ((i % n) + n) % n;
+                layout();
+            }
+
+            document.getElementById('cfPrev').addEventListener('click', function () { goTo(current - 1); });
+            document.getElementById('cfNext').addEventListener('click', function () { goTo(current + 1); });
+            window.addEventListener('resize', layout);
+
+            layout();
+
+            var backdrop = document.getElementById('cfModalBackdrop');
+            var modalImg = document.getElementById('cfModalImg');
+            var modalTitle = document.getElementById('cfModalTitle');
+            var modalBody = document.getElementById('cfModalBody');
+            var modalLink = document.getElementById('cfModalLink');
+            var modalLinkLabel = document.getElementById('cfModalLinkLabel');
+
+            function openModal(p) {
+                modalImg.src = p.img;
+                modalImg.alt = p.title;
+                modalTitle.textContent = p.title;
+                modalBody.textContent = p.full;
+                modalLink.href = p.link;
+                modalLinkLabel.textContent = p.linkLabel;
+                backdrop.classList.add('open');
+            }
+            function closeModal() { backdrop.classList.remove('open'); }
+            document.getElementById('cfModalClose').addEventListener('click', closeModal);
+            backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+        })();
+        </script>
         
     </div>
 
